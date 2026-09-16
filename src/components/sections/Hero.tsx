@@ -65,7 +65,7 @@ export default function Hero() {
               autoPlay
               muted
               playsInline
-              preload="none"
+              preload="auto"
               className="w-full h-full object-cover"
             />
           </div>
