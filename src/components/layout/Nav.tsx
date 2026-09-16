@@ -19,7 +19,12 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
       transition={{ duration: 0.5, ease }}
     >
       <div className="max-w-5xl mx-auto h-14 flex items-center justify-between">
-        <span className="text-[15px] font-bold tracking-tight">Kit</span>
+        <div className="flex justify-center items-center gap-3">
+          <div>
+            <img src="../src/imports/WEB_PIC.png" width="30" className="rounded-lg" alt="logo" />
+          </div>
+          <span className="text-[15px] font-bold tracking-tight">Kit</span>
+        </div>
         <div className="flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <a
