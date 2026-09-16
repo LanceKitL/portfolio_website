@@ -1,4 +1,4 @@
-const CACHE_NAME = "portfolio-cache-v1"
+const CACHE_NAME = "portfolio-cache-v2"
 const SHELL_ASSETS = ["/", "/index.html"]
 
 self.addEventListener("install", (event) => {
@@ -30,6 +30,9 @@ self.addEventListener("fetch", (event) => {
   }
   if (new URL(request.url).pathname === "/sw.js") return
 
+  // Browsers use range requests for video seeking; let the server handle them.
+  if (request.headers.has("range")) return
+
   if (request.mode === "navigate") {
     event.respondWith(
       caches.match(request).then((cached) => {
@@ -54,7 +57,7 @@ self.addEventListener("fetch", (event) => {
       if (cached) return cached
 
       return fetch(request).then((response) => {
-        if (response.ok || response.type === "opaque") {
+        if (response.status === 200 || response.type === "opaque") {
           const copy = response.clone()
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
         }
