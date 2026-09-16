@@ -7,6 +7,8 @@ export interface Project {
   longDescription: string
   tags: string[]
   image: string
+  github: string
+  live?: string
 }
 
 export interface Achievement {
@@ -34,6 +36,7 @@ export const PROJECTS: Project[] = [
       "AutoMatik was built to digitize and streamline the full lifecycle of a car dealership — from browsing inventory to closing a deal. As Project Manager and Fullstack Developer, I led the architecture and implementation of a customer self-service portal, a conversational AI chatbot that handles inventory questions and lead qualification, real-time push notifications for deal updates, and a secure auth layer combining JWT tokens with session management. The UI was designed from the ground up in Svelte with Tailwind, prioritizing clarity and speed for both customers and dealership staff.",
     tags: ["Python", "Flask", "Svelte", "Tailwind", "SocketIO"],
     image: "/001.jpg",
+    github: "https://github.com/LanceKitL/automatik",
   },
   {
     id: 2,
@@ -46,6 +49,8 @@ export const PROJECTS: Project[] = [
       "Tilao Corp. is a full-featured ERP prototype designed for a company that produces and sells clothing. As the sole Fullstack Developer, I built modules covering raw material tracking, production order management, inventory control, and sales reporting — all tied together in a unified React dashboard. The interface was crafted with Tailwind to keep complex data readable across screen sizes, and the system was architected to be extendable as the business scales.",
     tags: ["React", "Tailwind", "Shadcn"],
     image: "/002.jpg",
+    github: "https://github.com/LanceKitL/tilao_corp_demo",
+    live: "https://tilao-corp-demo.vercel.app/",
   },
   {
     id: 3,
@@ -58,6 +63,7 @@ export const PROJECTS: Project[] = [
       "SciLab was built for schools that can't rely on a stable internet connection. The system runs entirely on a local machine and manages laboratory equipment inventory with a clean web interface powered by Laravel and Tailwind. The standout feature is a shell script I wrote that bootstraps the entire stack — web server, database, and browser — with a single command, making it accessible to students and professors with zero technical background. The offline-first design ensures the app works reliably in any environment.",
     tags: ["Shell", "Laravel", "Tailwind"],
     image: "/003.jpg",
+    github: "https://github.com/LanceKitL/sci-lab",
   },
 ]
 
