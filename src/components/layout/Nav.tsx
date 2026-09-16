@@ -21,7 +21,7 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
       <div className="max-w-5xl mx-auto h-14 flex items-center justify-between">
         <div className="flex justify-center items-center gap-3">
           <div>
-            <img src="../src/imports/WEB_PIC.png" width="30" className="rounded-lg" alt="logo" />
+            <img src="/WEB_PIC.png" width="30" className="rounded-lg" alt="logo" />
           </div>
           <span className="text-[15px] font-bold tracking-tight">Kit</span>
         </div>

@@ -61,7 +61,7 @@ export default function Hero() {
         >
           <div className="w-full h-full lg:w-[310px] lg:h-[240px] rounded-[32px] overflow-hidden bg-[#CECECE] dark:bg-[#CECECE] mx-auto lg:mx-0">
             <video
-              src="./src/imports/01.mp4"
+              src="/01.mp4"
               autoPlay
               muted
               playsInline
