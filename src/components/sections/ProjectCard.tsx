@@ -24,16 +24,16 @@ export default function ProjectCard({
       whileHover={{ y: -2 }}
       onClick={() => onSelect(project.id)}
     >
-      <div className="p-10 flex flex-col justify-between min-h-[260px]">
+      <div className="p-6 sm:p-10 flex flex-col justify-between min-h-[260px]">
         <div>
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-2 sm:gap-3 mb-6 min-w-0">
             <span className="text-[11px] font-semibold text-[#6e6e73] uppercase tracking-widest">
               {String(index + 1).padStart(2, "0")}
             </span>
             <span className="text-[11px] text-[#b0b0b5]">/</span>
             <motion.span
               layoutId={`card-category-${project.id}`}
-              className="text-[12px] text-[#6e6e73]"
+              className="text-[11px] sm:text-[12px] text-[#6e6e73] truncate"
             >
               {project.category}
             </motion.span>
@@ -43,7 +43,7 @@ export default function ProjectCard({
           </div>
           <motion.h3
             layoutId={`card-title-${project.id}`}
-            className="text-[28px] font-bold tracking-[-0.02em] mb-3"
+            className="text-[25px] sm:text-[28px] font-bold tracking-[-0.02em] mb-3"
           >
             {project.title}
           </motion.h3>

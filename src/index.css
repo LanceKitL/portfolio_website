@@ -23,6 +23,7 @@ body {
   font-family: var(--font-sans);
   background: #ffffff;
   color: #1d1d1f;
+  overflow-x: hidden;
 }
 
 @keyframes fadeUp {

@@ -12,11 +12,11 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
   const contact = useContactForm(onSuccess)
 
   return (
-    <section id="contact" className="py-28 px-6 max-w-5xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+    <section id="contact" className="py-20 sm:py-28 px-5 sm:px-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         <motion.div
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, ease }}
         >
@@ -31,8 +31,8 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, ease }}
         >

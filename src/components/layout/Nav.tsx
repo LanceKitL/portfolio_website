@@ -13,12 +13,12 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
 
   return (
     <motion.nav
-      className="fixed px-7 lg:px-0 top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#000000]/80 backdrop-blur-xl border-b border-[#d2d2d7]/60 dark:border-[#424245]/60"
+      className="fixed px-4 sm:px-7 lg:px-0 top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#000000]/80 backdrop-blur-xl border-b border-[#d2d2d7]/60 dark:border-[#424245]/60"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease }}
     >
-      <div className="max-w-5xl mx-auto h-14 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto min-h-14 py-2 flex items-center justify-between gap-4">
         <div className="flex justify-center items-center gap-3">
           <div>
             <img
@@ -31,13 +31,13 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
           </div>
           <span className="text-[15px] font-bold tracking-tight">Kit</span>
         </div>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center justify-end gap-3 sm:gap-5 lg:gap-8">
           {NAV_LINKS.map((link) => (
             <a
               key={link}
               href={`#${link.toLowerCase()}`}
               onClick={() => setActiveNav(link)}
-              className={`text-[13px] font-medium transition-colors ${
+              className={`text-[11px] sm:text-[13px] font-medium transition-colors ${
                 activeNav === link
                   ? "text-[#1d1d1f] dark:text-[#f5f5f7]"
                   : "text-[#6e6e73] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"

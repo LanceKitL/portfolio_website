@@ -15,7 +15,7 @@ export default function ProjectOverlay({
     <>
       <motion.div
         key="scrim"
-        className="fixed inset-0 z-[100] bg-black/50"
+        className="fixed inset-0 z-100 bg-black/50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -26,7 +26,7 @@ export default function ProjectOverlay({
       <motion.div
         key={`expanded-${project.id}`}
         layoutId={`card-${project.id}`}
-        className="fixed inset-x-0 z-[110] mx-auto w-[min(680px,92vw)] max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0d0d0d] shadow-2xl will-change-transform"
+        className="fixed inset-x-0 z-110 mx-auto w-[calc(100vw-2rem)] sm:w-[min(680px,92vw)] max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0d0d0d] shadow-2xl will-change-transform"
         style={{ top: "4vh", originX: 0.5, originY: 0 }}
       >
         <button
@@ -39,7 +39,7 @@ export default function ProjectOverlay({
 
         <motion.div
           layoutId={`card-image-${project.id}`}
-          className="w-full h-[260px] bg-[#f0f0f5] dark:bg-[#111]"
+          className="w-full h-65 bg-[#f0f0f5] dark:bg-[#111]"
         >
           <div className="h-full overflow-hidden rounded-t-3xl">
             <motion.img
@@ -55,7 +55,7 @@ export default function ProjectOverlay({
           </div>
         </motion.div>
 
-        <div className="p-8">
+        <div className="p-6 sm:p-8">
           <motion.p
             layoutId={`card-category-${project.id}`}
             className="text-[12px] text-[#6e6e73] dark:text-[#98989d] uppercase tracking-widest mb-3"
@@ -68,7 +68,7 @@ export default function ProjectOverlay({
           </motion.p>
           <motion.h3
             layoutId={`card-title-${project.id}`}
-            className="text-[32px] font-bold tracking-[-0.02em] mb-5"
+            className="text-[28px] sm:text-[32px] font-bold tracking-[-0.02em] mb-5"
             initial={{ filter: "blur(4px)" }}
             animate={{ filter: "blur(0px)" }}
             exit={{ filter: "blur(4px)" }}

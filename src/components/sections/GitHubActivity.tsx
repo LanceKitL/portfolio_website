@@ -38,13 +38,13 @@ export default function GitHubActivity() {
           </a>
         </div>
 
-        <div className="w-full overflow-x-auto pb-1">
+        <div className="w-full pb-1">
           {lightImageError && darkImageError ? (
-              <div className="min-w-170 min-h-24 flex items-center justify-center border border-dashed border-[#d2d2d7] dark:border-[#424245] rounded-xl px-6 text-center text-[12px] text-[#6e6e73]">
+              <div className="min-h-24 flex items-center justify-center border border-dashed border-[#d2d2d7] dark:border-[#424245] rounded-xl px-6 text-center text-[12px] text-[#6e6e73]">
                 Activity will appear here when the snk workflow publishes the contribution SVG.
               </div>
           ) : (
-            <div className="min-w-170">
+            <div>
               {!lightImageError && (
                 <img
                   src={SNAKE_URL}
