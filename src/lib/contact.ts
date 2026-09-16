@@ -5,6 +5,8 @@ const ACCESS_KEY = import.meta.env.VITE_ACCESS_KEY
 export const LIMITS = { name: 100, email: 254, message: 2000 } as const
 
 export const MIN_MESSAGE_LENGTH = 10
+export const RATE_LIMIT_MESSAGE =
+  "You have reached the limit of 2 messages from this IP address. Please try again later."
 
 export function sanitizeLine(value: string, max: number): string {
   return value
@@ -84,7 +86,7 @@ export async function submitContactForm(
     if (response.status === 429) {
       return {
         ok: false,
-        error: "Too many requests. Please try again in a few minutes.",
+        error: RATE_LIMIT_MESSAGE,
         rateLimited: true,
       }
     }

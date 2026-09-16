@@ -19,7 +19,7 @@ export default function ContactForm({ api }: ContactFormProps) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.35, ease }}
-      onSubmit={api.handleSubmit}
+      onSubmit={api.requestSubmit}
       onFocusCapture={api.onFocusCapture}
       className="space-y-5"
     >
@@ -89,15 +89,6 @@ export default function ContactForm({ api }: ContactFormProps) {
       >
         {sending ? "Sending…" : "Send message"}
       </motion.button>
-      {api.status === "error" && (
-        <p
-          role="alert"
-          aria-live="polite"
-          className="text-[13px] text-[#d70015] dark:text-[#ff453a]"
-        >
-          {api.errorMsg}
-        </p>
-      )}
     </motion.form>
   )
 }

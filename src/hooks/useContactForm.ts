@@ -30,6 +30,7 @@ export default function useContactForm(onSuccess?: () => void) {
   const [status, setStatus] = useState<ContactStatus>("idle")
   const [errorMsg, setErrorMsg] = useState("")
   const [sent, setSent] = useState(false)
+  const [confirming, setConfirming] = useState(false)
   const [honeypot, setHoneypot] = useState(false)
   const firstInteractionAt = useRef<number | null>(null)
 
@@ -44,12 +45,30 @@ export default function useContactForm(onSuccess?: () => void) {
   }
 
   function succeed() {
+    setStatus("idle")
+    setErrorMsg("")
     setSent(true)
     onSuccess?.()
   }
 
-  async function handleSubmit(e: FormEvent) {
+  function reset() {
+    setSent(false)
+    setStatus("idle")
+    setErrorMsg("")
+  }
+
+  function requestSubmit(e: FormEvent) {
     e.preventDefault()
+    if (status === "sending") return
+    setConfirming(true)
+  }
+
+  function cancelSubmit() {
+    setConfirming(false)
+  }
+
+  async function confirmSubmit() {
+    setConfirming(false)
     if (status === "sending") return
 
     if (honeypot) {
@@ -82,7 +101,7 @@ export default function useContactForm(onSuccess?: () => void) {
     const cooldown = getCooldownRemaining()
     if (cooldown > 0) {
       return fail(
-        `Please wait ${Math.ceil(cooldown / 1000)}s before sending again.`,
+        `Please wait ${Math.ceil(cooldown / 1000)} seconds before sending another message.`,
       )
     }
 
@@ -105,10 +124,14 @@ export default function useContactForm(onSuccess?: () => void) {
     status,
     errorMsg,
     sent,
+    confirming,
+    reset,
+    requestSubmit,
+    cancelSubmit,
+    confirmSubmit,
     honeypot,
     setHoneypot,
     onFocusCapture,
-    handleSubmit,
   }
 }
 
