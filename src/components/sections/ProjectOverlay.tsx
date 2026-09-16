@@ -32,7 +32,7 @@ export default function ProjectOverlay({
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/20 dark:bg-white/10 flex items-center justify-center text-white text-[14px] hover:bg-black/30 transition-colors"
+          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-red-500/15 dark:bg-red-400/15 flex items-center justify-center text-red-600 dark:text-red-300 text-[14px] hover:bg-red-500/25 transition-colors"
         >
           ✕
         </button>
@@ -126,12 +126,6 @@ export default function ProjectOverlay({
                     </svg>
                   </a>
                 )}
-                <button
-                  onClick={onClose}
-                  className="text-[13px] font-medium text-[#6e6e73] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7] transition-colors"
-                >
-                  Close
-                </button>
               </div>
             </div>
           </motion.div>
