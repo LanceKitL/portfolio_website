@@ -2,12 +2,13 @@ import { useState } from "react"
 import { motion } from "motion/react"
 
 const SNAKE_URL =
-  "https://raw.githubusercontent.com/LanceKitL/portfolio_website/output/github-contribution-grid-snake.svg"
+  "https://raw.githubusercontent.com/LanceKitL/portfolio_website/gh-pages/github-contribution-grid-snake.svg"
 const SNAKE_DARK_URL =
-  "https://raw.githubusercontent.com/LanceKitL/portfolio_website/output/github-contribution-grid-snake-dark.svg"
+  "https://raw.githubusercontent.com/LanceKitL/portfolio_website/gh-pages/github-contribution-grid-snake-dark.svg"
 
 export default function GitHubActivity() {
-  const [imageError, setImageError] = useState(false)
+  const [lightImageError, setLightImageError] = useState(false)
+  const [darkImageError, setDarkImageError] = useState(false)
 
   return (
     <motion.article
@@ -37,23 +38,33 @@ export default function GitHubActivity() {
           </a>
         </div>
 
-          <div className="w-full overflow-x-auto pb-1">
-            {imageError ? (
+        <div className="w-full overflow-x-auto pb-1">
+          {lightImageError && darkImageError ? (
               <div className="min-w-170 min-h-24 flex items-center justify-center border border-dashed border-[#d2d2d7] dark:border-[#424245] rounded-xl px-6 text-center text-[12px] text-[#6e6e73]">
                 Activity will appear here when the snk workflow publishes the contribution SVG.
               </div>
-            ) : (
-              <picture className="block min-w-170">
-                <source media="(prefers-color-scheme: dark)" srcSet={SNAKE_DARK_URL} />
+          ) : (
+            <div className="min-w-170">
+              {!lightImageError && (
                 <img
                   src={SNAKE_URL}
                   alt="GitHub contribution activity for LanceKitL"
                   loading="lazy"
-                  onError={() => setImageError(true)}
-                  className="block w-full h-auto"
+                  onError={() => setLightImageError(true)}
+                  className="block w-full h-auto dark:hidden"
                 />
-              </picture>
-            )}
+              )}
+              {!darkImageError && (
+                <img
+                  src={SNAKE_DARK_URL}
+                  alt="GitHub contribution activity for LanceKitL"
+                  loading="lazy"
+                  onError={() => setDarkImageError(true)}
+                  className="hidden w-full h-auto dark:block"
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </motion.article>
