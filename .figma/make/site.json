@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your projects, achievements, and contact info in a sleek, Apple-inspired portfolio that highlights your work with clean design and intuitive navigation.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
