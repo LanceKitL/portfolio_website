@@ -56,7 +56,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                   ? "Cancel message confirmation"
                   : "Close message sent dialog"
               }
-              className="fixed inset-0 z-[100] cursor-default bg-black/50"
+              className="fixed inset-0 z-100 cursor-default bg-black/50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -66,7 +66,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
               }
             />
             <motion.div
-              className="fixed inset-0 z-[110] flex items-center justify-center p-4 pointer-events-none"
+              className="fixed inset-0 z-110 flex items-center justify-center p-4 pointer-events-none"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -80,7 +80,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                     ? "confirm-message-title"
                     : "message-sent-title"
                 }
-                className="pointer-events-auto w-[min(520px,100%)] rounded-3xl bg-white p-8 text-center shadow-2xl dark:bg-[#0d0d0d]"
+                className="pointer-events-auto max-h-[calc(100dvh-2rem)] w-[min(520px,100%)] overflow-y-auto rounded-3xl bg-white p-6 text-center shadow-2xl dark:bg-[#0d0d0d] sm:p-8"
                 initial={{ opacity: 0, scale: 0.92, y: 18 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: 10 }}
@@ -99,7 +99,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                         <div className="text-[11px] font-semibold uppercase tracking-widest text-[#6e6e73]">
                           From
                         </div>
-                        <div className="mt-1 break-words text-[14px]">
+                        <div className="mt-1 wrap-break-word text-[14px]">
                           {contact.form.name}
                         </div>
                       </div>
@@ -107,7 +107,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                         <div className="text-[11px] font-semibold uppercase tracking-widest text-[#6e6e73]">
                           Email
                         </div>
-                        <div className="mt-1 break-words text-[14px]">
+                        <div className="mt-1 wrap-break-word text-[14px]">
                           {contact.form.email}
                         </div>
                       </div>
@@ -115,7 +115,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                         <div className="text-[11px] font-semibold uppercase tracking-widest text-[#6e6e73]">
                           Message
                         </div>
-                        <div className="mt-1 max-h-32 overflow-y-auto whitespace-pre-wrap break-words text-[14px] text-[#6e6e73] dark:text-[#b0b0b5]">
+                        <div className="mt-1 max-h-32 overflow-y-auto whitespace-pre-wrap wrap-break-word text-[14px] text-[#6e6e73] dark:text-[#b0b0b5]">
                           {contact.form.message}
                         </div>
                       </div>

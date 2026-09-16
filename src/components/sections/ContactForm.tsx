@@ -20,7 +20,6 @@ export default function ContactForm({ api }: ContactFormProps) {
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.35, ease }}
       onSubmit={api.requestSubmit}
-      onFocusCapture={api.onFocusCapture}
       className="space-y-5"
     >
       <input
@@ -81,6 +80,11 @@ export default function ContactForm({ api }: ContactFormProps) {
           placeholder="What are you working on?"
         />
       </div>
+      {api.errorMsg && (
+        <p role="alert" className="text-[13px] leading-relaxed text-red-600 dark:text-red-400">
+          {api.errorMsg}
+        </p>
+      )}
       <motion.button
         type="submit"
         disabled={sending}

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import type { FormEvent } from "react"
 import {
   getCooldownRemaining,
@@ -32,16 +32,8 @@ export default function useContactForm(onSuccess?: () => void) {
   const [sent, setSent] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [honeypot, setHoneypot] = useState(false)
-  const firstInteractionAt = useRef<number | null>(null)
-
   function setField(key: ContactField, value: string) {
     setForm((s) => ({ ...s, [key]: value }))
-  }
-
-  function onFocusCapture() {
-    if (firstInteractionAt.current === null) {
-      firstInteractionAt.current = Date.now()
-    }
   }
 
   function succeed() {
@@ -72,14 +64,6 @@ export default function useContactForm(onSuccess?: () => void) {
     if (status === "sending") return
 
     if (honeypot) {
-      succeed()
-      return
-    }
-
-    if (
-      firstInteractionAt.current !== null &&
-      Date.now() - firstInteractionAt.current < 1000
-    ) {
       succeed()
       return
     }
@@ -131,7 +115,6 @@ export default function useContactForm(onSuccess?: () => void) {
     confirmSubmit,
     honeypot,
     setHoneypot,
-    onFocusCapture,
   }
 }
 
