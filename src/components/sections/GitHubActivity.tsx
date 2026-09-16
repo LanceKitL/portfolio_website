@@ -51,7 +51,7 @@ export default function GitHubActivity() {
                   alt="GitHub contribution activity for LanceKitL"
                   loading="lazy"
                   onError={() => setLightImageError(true)}
-                  className="block w-full h-auto dark:hidden"
+                  className="relative -left-1 block w-[calc(100%+8px)] h-auto dark:hidden sm:static sm:w-full"
                 />
               )}
               {!darkImageError && (
@@ -60,7 +60,7 @@ export default function GitHubActivity() {
                   alt="GitHub contribution activity for LanceKitL"
                   loading="lazy"
                   onError={() => setDarkImageError(true)}
-                  className="hidden w-full h-auto dark:block"
+                  className="relative -left-1 hidden w-[calc(100%+8px)] h-auto dark:block sm:static sm:w-full"
                 />
               )}
             </div>
