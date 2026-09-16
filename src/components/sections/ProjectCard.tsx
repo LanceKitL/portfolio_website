@@ -20,8 +20,8 @@ export default function ProjectCard({
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease }}
-      whileHover={{ y: -3, boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}
+      transition={{ duration: 0.4, delay: index * 0.01, ease }}
+      whileHover={{ y: -2, boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}
       onClick={() => onSelect(project.id)}
     >
       <div className="p-10 flex flex-col justify-between min-h-[260px]">
@@ -69,6 +69,7 @@ export default function ProjectCard({
         <img
           src={project.image}
           alt={project.title}
+          loading="lazy"
           className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
         />
       </motion.div>

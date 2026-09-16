@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useScroll } from "motion/react"
 import ConfettiLayer from "@/components/ConfettiLayer"
 import Footer from "@/components/layout/Footer"
@@ -14,7 +14,24 @@ import useTheme from "@/hooks/useTheme"
 export default function App() {
   const { dark, toggleDark } = useTheme()
   const [confettiRun, setConfettiRun] = useState(false)
+  const [showContent, setShowContent] = useState(false)
+  const startTime = useRef(Date.now())
   const { scrollYProgress } = useScroll()
+
+  useEffect(() => {
+    const elapsed = Date.now() - startTime.current
+    const remaining = Math.max(0, 2000 - elapsed)
+    const timer = setTimeout(() => setShowContent(true), remaining)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (!showContent) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-[#000000] flex items-center justify-center">
+        <div className="loader" />
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#000000] text-[#1d1d1f] dark:text-[#f5f5f7] transition-colors duration-300">
