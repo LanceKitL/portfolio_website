@@ -1,10 +1,9 @@
-import { motion } from "motion/react"
+import { motion, type MotionProps } from "motion/react"
 import { useEffect, useRef, useState, useMemo } from "react"
 
-const buildKeyframes = (
-  from: Record<string, unknown>,
-  steps: Record<string, unknown>[],
-) => {
+type Snapshot = Record<string, unknown>
+
+const buildKeyframes = (from: Snapshot, steps: Snapshot[]) => {
   const keys = new Set([
     ...Object.keys(from),
     ...steps.flatMap((s) => Object.keys(s)),
@@ -24,8 +23,8 @@ interface BlurTextProps {
   direction?: "top" | "bottom"
   threshold?: number
   rootMargin?: string
-  animationFrom?: Record<string, unknown>
-  animationTo?: Record<string, unknown>[]
+  animationFrom?: Snapshot
+  animationTo?: Snapshot[]
   easing?: (t: number) => number
   onAnimationComplete?: () => void
   stepDuration?: number
@@ -107,8 +106,12 @@ const BlurText = ({
           <motion.span
             className="inline-block will-change-[transform,filter,opacity]"
             key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
+            initial={fromSnapshot as unknown as MotionProps["initial"]}
+            animate={
+              (inView
+                ? animateKeyframes
+                : fromSnapshot) as unknown as MotionProps["animate"]
+            }
             transition={spanTransition}
             onAnimationComplete={
               index === elements.length - 1 ? onAnimationComplete : undefined

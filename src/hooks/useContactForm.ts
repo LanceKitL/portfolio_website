@@ -1,0 +1,115 @@
+import { useRef, useState } from "react"
+import type { FormEvent } from "react"
+import {
+  getCooldownRemaining,
+  isValidEmail,
+  LIMITS,
+  markSubmitted,
+  MIN_MESSAGE_LENGTH,
+  sanitizeLine,
+  sanitizeMessage,
+  submitContactForm,
+} from "@/lib/contact"
+
+export type ContactField = "name" | "email" | "message"
+
+export type ContactStatus = "idle" | "sending" | "error"
+
+export interface ContactFormValues {
+  name: string
+  email: string
+  message: string
+}
+
+export default function useContactForm(onSuccess?: () => void) {
+  const [form, setForm] = useState<ContactFormValues>({
+    name: "",
+    email: "",
+    message: "",
+  })
+  const [status, setStatus] = useState<ContactStatus>("idle")
+  const [errorMsg, setErrorMsg] = useState("")
+  const [sent, setSent] = useState(false)
+  const [honeypot, setHoneypot] = useState(false)
+  const firstInteractionAt = useRef<number | null>(null)
+
+  function setField(key: ContactField, value: string) {
+    setForm((s) => ({ ...s, [key]: value }))
+  }
+
+  function onFocusCapture() {
+    if (firstInteractionAt.current === null) {
+      firstInteractionAt.current = Date.now()
+    }
+  }
+
+  function succeed() {
+    setSent(true)
+    onSuccess?.()
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    if (status === "sending") return
+
+    if (honeypot) {
+      succeed()
+      return
+    }
+
+    if (
+      firstInteractionAt.current !== null &&
+      Date.now() - firstInteractionAt.current < 1000
+    ) {
+      succeed()
+      return
+    }
+
+    const name = sanitizeLine(form.name, LIMITS.name)
+    const email = sanitizeLine(form.email, LIMITS.email)
+    const message = sanitizeMessage(form.message, LIMITS.message)
+
+    const fail = (msg: string) => {
+      setStatus("error")
+      setErrorMsg(msg)
+    }
+
+    if (!name) return fail("Please enter your name.")
+    if (!isValidEmail(email)) return fail("Please enter a valid email address.")
+    if (message.length < MIN_MESSAGE_LENGTH)
+      return fail("Please write a slightly longer message.")
+
+    const cooldown = getCooldownRemaining()
+    if (cooldown > 0) {
+      return fail(
+        `Please wait ${Math.ceil(cooldown / 1000)}s before sending again.`,
+      )
+    }
+
+    setStatus("sending")
+    setErrorMsg("")
+
+    const result = await submitContactForm({ name, email, message })
+
+    if (result.ok) {
+      markSubmitted()
+      succeed()
+    } else {
+      fail(result.error)
+    }
+  }
+
+  return {
+    form,
+    setField,
+    status,
+    errorMsg,
+    sent,
+    honeypot,
+    setHoneypot,
+    onFocusCapture,
+    handleSubmit,
+  }
+}
+
+export type ContactFormApi = ReturnType<typeof useContactForm>
