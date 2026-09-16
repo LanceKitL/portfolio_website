@@ -24,7 +24,7 @@ export default function ProjectCard({
       whileHover={{ y: -2 }}
       onClick={() => onSelect(project.id)}
     >
-      <div className="p-6 sm:p-10 flex flex-col justify-between min-h-[260px]">
+      <div className="p-6 sm:p-10 flex flex-col justify-between min-h-65">
         <div>
           <div className="flex items-center gap-2 sm:gap-3 mb-6 min-w-0">
             <span className="text-[11px] font-semibold text-[#6e6e73] uppercase tracking-widest">
@@ -49,6 +49,9 @@ export default function ProjectCard({
           </motion.h3>
           <p className="text-[15px] text-[#6e6e73] leading-relaxed max-w-sm">
             {project.description}
+          </p>
+          <p className="mt-4 text-[13px] font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">
+            {project.outcome}
           </p>
         </div>
         <div className="flex flex-wrap gap-2 mt-8">

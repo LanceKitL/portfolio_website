@@ -3,6 +3,8 @@ export interface Project {
   title: string
   category: string
   year: string
+  role: string
+  outcome: string
   description: string
   longDescription: string
   tags: string[]
@@ -14,6 +16,7 @@ export interface Project {
 export interface Achievement {
   icon: string
   title: string
+  result: string
   detail: string
 }
 
@@ -30,6 +33,8 @@ export const PROJECTS: Project[] = [
     title: "AutoMatik",
     category: "Fullstack · Project Manager",
     year: "2026",
+    role: "Project Manager · Fullstack Developer",
+    outcome: "One workflow from inventory to closed deal",
     description:
       "Car dealership management system covering the entire dealership process — customer self-portal, AI chatbot for inquiries, push notifications, and JWT + session security.",
     longDescription:
@@ -43,6 +48,8 @@ export const PROJECTS: Project[] = [
     title: "Tilao Corp.",
     category: "Fullstack · ERP",
     year: "2026",
+    role: "Sole Fullstack Developer",
+    outcome: "Production, inventory, and sales in one dashboard",
     description:
       "ERP prototype for a clothing manufacturing company covering production and sales workflows with a clean, responsive interface.",
     longDescription:
@@ -57,6 +64,8 @@ export const PROJECTS: Project[] = [
     title: "SciLab",
     category: "Fullstack · Offline-first",
     year: "2025",
+    role: "Fullstack Developer",
+    outcome: "A complete lab inventory system that runs offline",
     description:
       "Offline-first smart inventory management for schools, bundled with a shell script that auto-launches the entire stack — no technical knowledge required.",
     longDescription:
@@ -71,31 +80,37 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     icon: "◉",
     title: "Most Improved Award",
-    detail: "ASEAN Manila 2025 · Web Technologies",
+    result: "Award recipient",
+    detail: "ASEAN Manila · Web Technologies",
   },
   {
     icon: "◈",
     title: "Web Technologies Nationals",
-    detail: "Bronze Medalist · 2024",
+    result: "Bronze Medalist",
+    detail: "Web Technologies Nationals",
   },
   {
     icon: "★",
     title: "Web Technologies Regionals",
-    detail: "Gold Medalist · 2023",
+    result: "Gold Medalist",
+    detail: "Web Technologies Regionals",
   },
   {
     icon: "▲",
     title: "3+ Years Experience",
+    result: "Experience",
     detail: "Full-stack development & UI/UX design",
   },
   {
     icon: "◆",
     title: "Cross-stack Proficiency",
+    result: "Toolkit",
     detail: "Python, Svelte, React, Laravel, Tailwind",
   },
   {
     icon: "⬡",
     title: "Open to Collaboration",
+    result: "Availability",
     detail: "Part-time & project-based roles",
   },
 ]

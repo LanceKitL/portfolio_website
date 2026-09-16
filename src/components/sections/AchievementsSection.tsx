@@ -4,30 +4,37 @@ import { ACHIEVEMENTS, STATS } from "@/data/content"
 import { fadeUp, staggerContainer } from "@/lib/animations"
 
 export default function AchievementsSection() {
+  const featuredAchievements = ACHIEVEMENTS.slice(0, 3)
+  const supportingAchievements = ACHIEVEMENTS.slice(3)
+
   return (
     <section id="achievements" className="py-28 px-6 max-w-5xl mx-auto">
       <SectionHeading title="Achievements" meta="Recognition" />
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#d2d2d7]/60 dark:bg-[#424245]/60 rounded-2xl overflow-hidden border border-[#d2d2d7]/60 dark:border-[#424245]/60"
+        className="relative grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-6"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
       >
-        {ACHIEVEMENTS.map((item) => (
+        <div className="absolute bottom-6 left-4 top-6 w-px bg-[#d2d2d7] dark:bg-[#424245] md:bottom-auto md:left-0 md:right-0 md:top-5 md:h-px md:w-auto" />
+        {featuredAchievements.map((item) => (
           <motion.div
             key={item.title}
             variants={fadeUp}
-            className="bg-white dark:bg-[#000000] p-8 hover:bg-[#fafafa] dark:hover:bg-[#0d0d0d] transition-colors duration-200 group"
+            className="relative z-10 ml-10 flex min-h-36 flex-col items-start rounded-2xl border border-[#d2d2d7]/60 bg-white p-5 dark:border-[#424245]/60 dark:bg-[#000000] sm:p-8 md:ml-0 md:min-h-0"
           >
-            <div className="text-[22px] mb-5 text-[#6e6e73] group-hover:text-[#1d1d1f] dark:group-hover:text-[#f5f5f7] transition-colors">
+            <div className="absolute -left-10 top-6 flex h-8 w-8 items-center justify-center rounded-full border border-[#1d1d1f] bg-white text-[14px] text-[#1d1d1f] dark:border-[#f5f5f7] dark:bg-[#000000] dark:text-[#f5f5f7] md:static md:mb-6 md:h-10 md:w-10 md:border-[#1d1d1f]">
               {item.icon}
             </div>
-            <div className="text-[17px] font-semibold tracking-[-0.01em] mb-2">
+            <span className="mb-3 rounded-full bg-[#f5f5f7] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[#6e6e73] dark:bg-[#1c1c1e] dark:text-[#b0b0b5]">
+              {item.result}
+            </span>
+            <div className="mb-2 text-[17px] font-semibold leading-snug tracking-[-0.01em]">
               {item.title}
             </div>
-            <div className="text-[13px] text-[#6e6e73] leading-snug">
+            <div className="text-[13px] leading-snug text-[#6e6e73]">
               {item.detail}
             </div>
           </motion.div>
@@ -35,7 +42,33 @@ export default function AchievementsSection() {
       </motion.div>
 
       <motion.div
-        className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"
+        className="mt-6 grid grid-cols-1 gap-3 border-t border-[#d2d2d7]/60 pt-6 dark:border-[#424245]/60 sm:grid-cols-3"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {supportingAchievements.map((item) => (
+          <motion.div
+            key={item.title}
+            variants={fadeUp}
+            className="flex items-center gap-3 text-[13px] text-[#6e6e73]"
+          >
+            <span className="text-[16px] text-[#1d1d1f] dark:text-[#f5f5f7]">
+              {item.icon}
+            </span>
+            <span>
+              <strong className="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]">
+                {item.title}
+              </strong>
+              <span className="block mt-0.5">{item.result} · {item.detail}</span>
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      <motion.div
+        className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"

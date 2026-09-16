@@ -6,6 +6,7 @@ import Nav from "@/components/layout/Nav"
 import ScrollProgress from "@/components/layout/ScrollProgress"
 import AchievementsSection from "@/components/sections/AchievementsSection"
 import ContactSection from "@/components/sections/ContactSection"
+import CapabilitiesSection from "@/components/sections/CapabilitiesSection"
 import { PROJECTS } from "@/data/content"
 import Hero from "@/components/sections/Hero"
 import ProjectsSection from "@/components/sections/ProjectsSection"
@@ -85,6 +86,10 @@ export default function App() {
       <SectionDivider />
 
       <AchievementsSection />
+
+      <SectionDivider />
+
+      <CapabilitiesSection />
 
       <SectionDivider />
 

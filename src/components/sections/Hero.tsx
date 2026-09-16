@@ -34,6 +34,21 @@ export default function Hero() {
             stepDuration={0.3}
           />
 
+          <div className="flex flex-wrap gap-3 mb-8 sm:mb-10">
+            <a
+              href="#projects"
+              className="rounded-full bg-[#1d1d1f] px-5 py-3 text-[13px] font-medium text-white transition-colors hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
+            >
+              View selected work
+            </a>
+            <a
+              href="#contact"
+              className="rounded-full border border-[#d2d2d7] px-5 py-3 text-[13px] font-medium text-[#6e6e73] transition-colors hover:bg-white dark:border-[#424245] dark:hover:bg-[#1c1c1e]"
+            >
+              Get in touch
+            </a>
+          </div>
+
           <motion.div
             className="flex flex-wrap gap-2"
             variants={staggerContainer}

@@ -15,6 +15,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
     <section id="contact" className="py-20 sm:py-28 px-5 sm:px-6 max-w-5xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         <motion.div
+          className="order-2 lg:order-1"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -31,6 +32,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
         </motion.div>
 
         <motion.div
+          className="order-1 lg:order-2"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

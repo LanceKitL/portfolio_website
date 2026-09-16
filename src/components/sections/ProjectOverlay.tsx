@@ -77,6 +77,21 @@ export default function ProjectOverlay({
             {project.title}
           </motion.h3>
 
+          <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="rounded-xl bg-[#f5f5f7] p-4 dark:bg-[#1c1c1e]">
+              <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#6e6e73]">
+                My role
+              </p>
+              <p className="text-[13px] font-medium">{project.role}</p>
+            </div>
+            <div className="rounded-xl bg-[#f5f5f7] p-4 dark:bg-[#1c1c1e]">
+              <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-[#6e6e73]">
+                Outcome
+              </p>
+              <p className="text-[13px] font-medium">{project.outcome}</p>
+            </div>
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
