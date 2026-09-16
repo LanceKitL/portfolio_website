@@ -1,5 +1,6 @@
 import { AnimatePresence } from "motion/react"
 import SectionHeading from "@/components/SectionHeading"
+import GitHubActivity from "@/components/sections/GitHubActivity"
 import ProjectCard from "@/components/sections/ProjectCard"
 import ProjectOverlay from "@/components/sections/ProjectOverlay"
 import { PROJECTS } from "@/data/content"
@@ -24,6 +25,10 @@ export default function ProjectsSection() {
             onSelect={open}
           />
         ))}
+      </div>
+
+      <div className="mt-6">
+        <GitHubActivity />
       </div>
 
       <AnimatePresence>
