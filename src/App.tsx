@@ -36,7 +36,10 @@ function preloadAsset(url: string) {
   return new Promise<void>((resolve) => {
     const image = new Image()
     image.onload = () => {
-      image.decode().catch(() => undefined).finally(resolve)
+      image
+        .decode()
+        .catch(() => undefined)
+        .finally(resolve)
     }
     image.onerror = () => resolve()
     image.src = url
