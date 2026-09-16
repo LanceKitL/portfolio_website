@@ -57,6 +57,20 @@ body {
   animation: l12 2s infinite;
 }
 
+.dark .loader {
+  border: 1px solid #ffffff;
+  background:
+    linear-gradient(#ffffff 50%, #0000 0),
+    linear-gradient(#0000 50%, #ffffff 0),
+    linear-gradient(#ffffff 50%, #0000 0),
+    linear-gradient(#0000 50%, #ffffff 0),
+    linear-gradient(#ffffff 50%, #0000 0),
+    linear-gradient(#0000 50%, #ffffff 0)
+    #1c1c1e;
+  background-size: calc(100% / 6 + 1px) 200%;
+  background-repeat: no-repeat;
+}
+
 @keyframes l12 {
   0%     {background-position: calc(0*100%/5) 100%,calc(1*100%/5)   0%,calc(2*100%/5) 100%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
   16.67% {background-position: calc(0*100%/5)   0%,calc(1*100%/5)   0%,calc(2*100%/5) 100%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
