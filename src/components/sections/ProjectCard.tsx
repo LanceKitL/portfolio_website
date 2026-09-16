@@ -16,12 +16,12 @@ export default function ProjectCard({
   return (
     <motion.article
       layoutId={`card-${project.id}`}
-      className="group grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-0 rounded-2xl overflow-hidden border border-[#d2d2d7]/60 dark:border-[#424245]/60 bg-[#fafafa] dark:bg-[#0d0d0d] cursor-pointer"
+      className="group grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-0 rounded-2xl border border-[#d2d2d7]/60 dark:border-[#424245]/60 bg-[#fafafa] dark:bg-[#0d0d0d] cursor-pointer will-change-transform"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.4, delay: index * 0.01, ease }}
-      whileHover={{ y: -2, boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}
+      whileHover={{ y: -2 }}
       onClick={() => onSelect(project.id)}
     >
       <div className="p-10 flex flex-col justify-between min-h-[260px]">
@@ -64,14 +64,16 @@ export default function ProjectCard({
       </div>
       <motion.div
         layoutId={`card-image-${project.id}`}
-        className="bg-[#f0f0f5] dark:bg-[#111] overflow-hidden"
+        className="bg-[#f0f0f5] dark:bg-[#111]"
       >
-        <img
-          src={project.image}
-          alt={project.title}
-          loading="lazy"
-          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
-        />
+        <div className="h-full overflow-hidden rounded-b-2xl lg:rounded-b-none lg:rounded-r-2xl">
+          <img
+            src={project.image}
+            alt={project.title}
+            loading="lazy"
+            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          />
+        </div>
       </motion.div>
     </motion.article>
   )

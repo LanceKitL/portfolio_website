@@ -15,7 +15,7 @@ export default function ProjectOverlay({
     <>
       <motion.div
         key="scrim"
-        className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
+        className="fixed inset-0 z-[100] bg-black/50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -26,60 +26,62 @@ export default function ProjectOverlay({
       <motion.div
         key={`expanded-${project.id}`}
         layoutId={`card-${project.id}`}
-        className="fixed z-[110] top-[4vh] left-1/2 -translate-x-1/2 w-[min(680px,92vw)] max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0d0d0d] shadow-2xl"
-        style={{ originX: 0.5, originY: 0 }}
+        className="fixed inset-x-0 z-[110] mx-auto w-[min(680px,92vw)] max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0d0d0d] shadow-2xl will-change-transform"
+        style={{ top: "4vh", originX: 0.5, originY: 0 }}
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/20 dark:bg-white/10 backdrop-blur-md flex items-center justify-center text-white text-[14px] hover:bg-black/30 transition-colors"
+          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/20 dark:bg-white/10 flex items-center justify-center text-white text-[14px] hover:bg-black/30 transition-colors"
         >
           ✕
         </button>
 
         <motion.div
           layoutId={`card-image-${project.id}`}
-          className="w-full h-[260px] overflow-hidden rounded-t-3xl bg-[#f0f0f5] dark:bg-[#111]"
+          className="w-full h-[260px] bg-[#f0f0f5] dark:bg-[#111]"
         >
-          <motion.img
-            src={project.image}
-            alt={project.title}
-            loading="lazy"
-            className="w-full h-full object-cover"
-            initial={{ filter: "blur(12px)", scale: 1.04 }}
-            animate={{ filter: "blur(0px)", scale: 1 }}
-            exit={{ filter: "blur(12px)", scale: 1.04 }}
-            transition={{ duration: 0.45, ease }}
-          />
+          <div className="h-full overflow-hidden rounded-t-3xl">
+            <motion.img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              className="w-full h-full object-cover"
+              initial={{ filter: "blur(6px)", scale: 1.02 }}
+              animate={{ filter: "blur(0px)", scale: 1 }}
+              exit={{ filter: "blur(6px)", scale: 1.02 }}
+              transition={{ duration: 0.35, ease }}
+            />
+          </div>
         </motion.div>
 
         <div className="p-8">
           <motion.p
             layoutId={`card-category-${project.id}`}
             className="text-[12px] text-[#6e6e73] dark:text-[#98989d] uppercase tracking-widest mb-3"
-            initial={{ filter: "blur(6px)" }}
+            initial={{ filter: "blur(4px)" }}
             animate={{ filter: "blur(0px)" }}
-            exit={{ filter: "blur(6px)" }}
-            transition={{ duration: 0.4, ease }}
+            exit={{ filter: "blur(4px)" }}
+            transition={{ duration: 0.3, ease }}
           >
             {project.category}
           </motion.p>
           <motion.h3
             layoutId={`card-title-${project.id}`}
             className="text-[32px] font-bold tracking-[-0.02em] mb-5"
-            initial={{ filter: "blur(8px)" }}
+            initial={{ filter: "blur(4px)" }}
             animate={{ filter: "blur(0px)" }}
-            exit={{ filter: "blur(8px)" }}
-            transition={{ duration: 0.4, delay: 0.05, ease }}
+            exit={{ filter: "blur(4px)" }}
+            transition={{ duration: 0.3, delay: 0.05, ease }}
           >
             {project.title}
           </motion.h3>
 
           <motion.div
-            initial={{ opacity: 0, y: 12, filter: "blur(8px)" }}
+            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, filter: "blur(8px)" }}
-            transition={{ duration: 0.35, delay: 0.18, ease }}
+            exit={{ opacity: 0, filter: "blur(4px)" }}
+            transition={{ duration: 0.3, delay: 0.12, ease }}
           >
             <p className="text-[16px] text-[#6e6e73] leading-relaxed mb-6">
               {project.longDescription}
