@@ -12,7 +12,10 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
   const contact = useContactForm(onSuccess)
 
   return (
-    <section id="contact" className="py-20 sm:py-28 px-5 sm:px-6 max-w-5xl mx-auto">
+    <section
+      id="contact"
+      className="py-20 sm:py-28 px-5 sm:px-6 max-w-5xl mx-auto"
+    >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -88,7 +91,10 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
               >
                 {contact.confirming ? (
                   <>
-                    <h3 id="confirm-message-title" className="mb-2 text-[20px] font-semibold">
+                    <h3
+                      id="confirm-message-title"
+                      className="mb-2 text-[20px] font-semibold"
+                    >
                       Send this message?
                     </h3>
                     <p className="mb-6 text-[14px] text-[#6e6e73]">
@@ -154,7 +160,10 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
-                    <h3 id="message-sent-title" className="mb-2 text-[20px] font-semibold">
+                    <h3
+                      id="message-sent-title"
+                      className="mb-2 text-[20px] font-semibold"
+                    >
                       Message sent
                     </h3>
                     <p className="mb-6 text-[14px] text-[#6e6e73]">

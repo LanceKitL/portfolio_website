@@ -81,7 +81,10 @@ export default function ContactForm({ api }: ContactFormProps) {
         />
       </div>
       {api.errorMsg && (
-        <p role="alert" className="text-[13px] leading-relaxed text-red-600 dark:text-red-400">
+        <p
+          role="alert"
+          className="text-[13px] leading-relaxed text-red-600 dark:text-red-400"
+        >
           {api.errorMsg}
         </p>
       )}
