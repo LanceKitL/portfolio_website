@@ -19,7 +19,7 @@ export default function ProjectOverlay({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2 }}
         onClick={onClose}
       />
 
@@ -44,6 +44,7 @@ export default function ProjectOverlay({
           <motion.img
             src={project.image}
             alt={project.title}
+            loading="lazy"
             className="w-full h-full object-cover"
             initial={{ filter: "blur(12px)", scale: 1.04 }}
             animate={{ filter: "blur(0px)", scale: 1 }}

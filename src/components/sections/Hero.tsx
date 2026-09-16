@@ -27,7 +27,7 @@ export default function Hero() {
           </div>
 
           <BlurText
-            text="I build full-stack web apps with clean, thoughtful interfaces. Based in Quezon City, Philippines — open to part-time and project-based work."
+            text="I build full-stack web apps with clean, thoughtful interfaces. Based in Quezon City, Philippines."
             delay={40}
             className="text-[17px] text-[#6e6e73] leading-relaxed max-w-md mb-10"
             direction="bottom"
@@ -65,6 +65,7 @@ export default function Hero() {
               autoPlay
               muted
               playsInline
+              preload="none"
               className="w-full h-full object-cover"
             />
           </div>
