@@ -9,7 +9,7 @@ interface NavProps {
 }
 
 export default function Nav({ dark, onToggleDark }: NavProps) {
-  const [activeNav, setActiveNav] = useState("Projects")
+  const [activeNav, setActiveNav] = useState("")
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -24,13 +24,39 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
 
     const updateActiveSection = () => {
       frame = 0
-      const scrollPosition = window.scrollY + 96
-      const currentSection = sections.reduce((current, section) => {
-        const sectionTop = section.element.getBoundingClientRect().top + window.scrollY
-        return sectionTop <= scrollPosition ? section : current
-      }, sections[0])
+      const scrollY = window.scrollY
+      const scrollBottom = window.innerHeight + scrollY
+      const docHeight = document.documentElement.scrollHeight
 
-      if (currentSection) setActiveNav(currentSection.link)
+      // When reaching near the bottom of the page, activate Contact
+      if (scrollBottom >= docHeight - 80) {
+        setActiveNav("Contact")
+        return
+      }
+
+      const navOffset = 120
+      const firstSection = sections[0]
+      // When at the top (Hero section), no nav link should be highlighted
+      if (firstSection) {
+        const firstTop = firstSection.element.getBoundingClientRect().top + scrollY
+        if (scrollY + navOffset < firstTop) {
+          setActiveNav("")
+          return
+        }
+      }
+
+      // Find the current section in view
+      const scrollPosition = scrollY + navOffset
+      const currentSection = sections.reduce<typeof sections[0] | null>((current, section) => {
+        const sectionTop = section.element.getBoundingClientRect().top + scrollY
+        return sectionTop <= scrollPosition ? section : current
+      }, null)
+
+      if (currentSection) {
+        setActiveNav(currentSection.link)
+      } else {
+        setActiveNav("")
+      }
     }
 
     const handleScroll = () => {
@@ -54,11 +80,19 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false)
     }
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setMenuOpen(false)
+      }
+    }
+
     document.addEventListener("keydown", closeOnEscape)
+    window.addEventListener("resize", handleResize)
     document.body.style.overflow = "hidden"
 
     return () => {
       document.removeEventListener("keydown", closeOnEscape)
+      window.removeEventListener("resize", handleResize)
       document.body.style.overflow = ""
     }
   }, [menuOpen])
@@ -68,12 +102,11 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
     setMenuOpen(false)
   }
 
-  function linkClass(link: string) {
-    return `text-[11px] sm:text-[13px] font-medium transition-colors ${
-      activeNav === link
-        ? "text-[#1d1d1f] dark:text-[#f5f5f7]"
-        : "text-[#6e6e73] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"
-    }`
+  function handleLogoClick(e: React.MouseEvent) {
+    e.preventDefault()
+    window.scrollTo({ top: 0, behavior: "smooth" })
+    setActiveNav("")
+    history.pushState(null, "", " ")
   }
 
   return (
@@ -84,7 +117,12 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
       transition={{ duration: 0.5, ease }}
     >
       <div className="max-w-5xl mx-auto min-h-14 py-2 flex items-center justify-between gap-4">
-        <div className="flex justify-center items-center gap-3">
+        <a
+          href="#"
+          onClick={handleLogoClick}
+          className="flex justify-center items-center gap-3 transition-opacity hover:opacity-80 cursor-pointer"
+          aria-label="Scroll to top"
+        >
           <div>
             <img
               src="/WEB_PIC.png"
@@ -95,21 +133,50 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
             />
           </div>
           <span className="text-[15px] font-bold tracking-tight">Kit</span>
-        </div>
+        </a>
+
         <div className="flex items-center justify-end gap-3 sm:gap-5 lg:gap-8">
           <div className="hidden items-center gap-5 sm:flex lg:gap-8">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                onClick={() => selectNav(link)}
-                aria-current={activeNav === link ? "true" : undefined}
-                className={`${linkClass(link)} ${link === "Contact" ? "rounded-full bg-[#1d1d1f] px-4 py-2 text-white hover:bg-[#424245] dark:bg-[#1c1c1e] dark:text-white dark:hover:bg-[#2c2c2e]" : ""}`}
-              >
-                {link}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isContact = link === "Contact"
+              const isActive = activeNav === link
+
+              if (isContact) {
+                return (
+                  <a
+                    key={link}
+                    href={`#${link.toLowerCase()}`}
+                    onClick={() => selectNav(link)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`rounded-full px-4 py-2 text-[12px] sm:text-[13px] font-medium text-white transition-all ${
+                      isActive
+                        ? "bg-[#000000] ring-2 ring-[#1d1d1f]/20 dark:bg-white dark:text-[#1d1d1f] dark:ring-white/20"
+                        : "bg-[#1d1d1f] hover:bg-[#424245] dark:bg-[#1c1c1e] dark:text-white dark:hover:bg-[#2c2c2e]"
+                    }`}
+                  >
+                    {link}
+                  </a>
+                )
+              }
+
+              return (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  onClick={() => selectNav(link)}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`text-[12px] sm:text-[13px] font-medium transition-colors ${
+                    isActive
+                      ? "text-[#1d1d1f] dark:text-[#f5f5f7]"
+                      : "text-[#6e6e73] hover:text-[#1d1d1f] dark:hover:text-[#f5f5f7]"
+                  }`}
+                >
+                  {link}
+                </a>
+              )
+            })}
           </div>
+
           <motion.button
             onClick={onToggleDark}
             aria-label="Toggle dark mode"
@@ -162,6 +229,7 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
               )}
             </AnimatePresence>
           </motion.button>
+
           <motion.button
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
@@ -180,33 +248,56 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
           </motion.button>
         </div>
       </div>
+
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            id="mobile-navigation"
-            className="border-t border-[#d2d2d7]/60 py-3 dark:border-[#424245]/60 sm:hidden"
-            initial={{ opacity: 0, height: 0, y: -8 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -8 }}
-            transition={{ duration: 0.22, ease }}
-          >
-            <div className="mx-auto flex max-w-5xl flex-col gap-1">
-              {NAV_LINKS.map((link, index) => (
-                <motion.a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => selectNav(link)}
-                  aria-current={activeNav === link ? "true" : undefined}
-                  className={`${linkClass(link)} rounded-xl px-3 py-3 ${link === "Contact" ? "bg-[#1d1d1f] text-white dark:bg-[#1c1c1e] dark:text-white" : ""}`}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.04, duration: 0.2, ease }}
-                >
-                  {link}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+          <>
+            <motion.div
+              className="fixed inset-0 top-14 z-[-1] bg-black/25 dark:bg-black/50 backdrop-blur-[2px] sm:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <motion.div
+              id="mobile-navigation"
+              className="border-t border-[#d2d2d7]/60 py-3 dark:border-[#424245]/60 sm:hidden"
+              initial={{ opacity: 0, height: 0, y: -8 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -8 }}
+              transition={{ duration: 0.22, ease }}
+            >
+              <div className="mx-auto flex max-w-5xl flex-col gap-1">
+                {NAV_LINKS.map((link, index) => {
+                  const isContact = link === "Contact"
+                  const isActive = activeNav === link
+
+                  return (
+                    <motion.a
+                      key={link}
+                      href={`#${link.toLowerCase()}`}
+                      onClick={() => selectNav(link)}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`rounded-xl px-4 py-3 text-[14px] font-medium transition-colors ${
+                        isContact
+                          ? "bg-[#1d1d1f] text-white hover:bg-[#424245] dark:bg-[#1c1c1e] dark:text-white dark:hover:bg-[#2c2c2e]"
+                          : isActive
+                            ? "bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#1c1c1e] dark:text-[#f5f5f7]"
+                            : "text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#1d1d1f] dark:hover:bg-[#1c1c1e] dark:hover:text-[#f5f5f7]"
+                      }`}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.04, duration: 0.2, ease }}
+                    >
+                      {link}
+                    </motion.a>
+                  )
+                })}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>

@@ -25,7 +25,7 @@ export interface Stat {
   label: string
 }
 
-export const NAV_LINKS = ["Projects", "Achievements", "Contact"]
+export const NAV_LINKS = ["Projects", "Achievements", "Capabilities", "Contact"]
 
 export const PROJECTS: Project[] = [
   {

@@ -34,7 +34,7 @@ const CAPABILITIES = [
 
 export default function CapabilitiesSection() {
   return (
-    <section className="py-20 px-6 max-w-5xl mx-auto">
+    <section id="capabilities" className="py-20 px-6 max-w-5xl mx-auto">
       <SectionHeading title="Capabilities" meta="What I can help with" />
 
       <motion.div
