@@ -32,6 +32,8 @@ Welcome to the repository for **[lancekit.me](https://www.lancekit.me/)** — a 
 
     Open http://localhost:3000 in your browser to view the site.
 
+hello
+
 📄 License
 
 This project is open-source and available under the MIT License.
