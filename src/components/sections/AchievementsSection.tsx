@@ -23,7 +23,7 @@ export default function AchievementsSection() {
           <motion.div
             key={item.title}
             variants={fadeUp}
-            className="group relative z-10 ml-10 flex min-h-36 flex-col items-start rounded-2xl border border-[#d2d2d7]/60 bg-white p-5 dark:border-[#3b3c40]/70 dark:bg-[#242528] sm:p-8 md:ml-0 md:min-h-0"
+            className="group card relative z-10 ml-10 flex min-h-36 flex-col items-start rounded-2xl border border-[#d2d2d7]/60 bg-white p-5 dark:border-[#3b3c40]/70 dark:bg-[#242528] sm:p-8 md:ml-0 md:min-h-0"
           >
             <div className="transition-transform duration-300 group-hover:scale-105 absolute -left-10 top-6 flex h-8 w-8 items-center justify-center rounded-full overflow-hidden border border-[#1d1d1f]/30 dark:border-[#ffb86b]/60 bg-[#0d0d0f] shadow-xs md:static md:mb-5 md:h-14 md:w-14 md:rounded-2xl md:border md:border-[#d2d2d7]/80 md:dark:border-[#424245]/80 md:shadow-md">
               <img

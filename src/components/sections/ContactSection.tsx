@@ -82,7 +82,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                     ? "confirm-message-title"
                     : "message-sent-title"
                 }
-                className="pointer-events-auto max-h-[calc(100dvh-2rem)] w-[min(520px,100%)] overflow-y-auto rounded-3xl bg-white p-6 text-center shadow-2xl dark:bg-[#242528] sm:p-8"
+                className="elevated pointer-events-auto max-h-[calc(100dvh-2rem)] w-[min(520px,100%)] overflow-y-auto rounded-3xl bg-white p-6 text-center dark:bg-[#242528] sm:p-8"
                 initial={{ opacity: 0, scale: 0.92, y: 18 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: 10 }}
@@ -133,7 +133,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                       <button
                         type="button"
                         onClick={contact.confirmSubmit}
-                        className="rounded-full bg-[#1d1d1f] px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
+className="card rounded-full bg-[#1d1d1f] px-5 py-2.5 text-[13px] font-medium text-white transition hover:elevated hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
                       >
                         Confirm
                       </button>
@@ -165,7 +165,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                     <button
                       type="button"
                       onClick={contact.reset}
-                      className="rounded-full bg-[#1d1d1f] px-5 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
+                      className="card rounded-full bg-[#1d1d1f] px-5 py-2.5 text-[13px] font-medium text-white transition hover:elevated hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
                     >
                       Close
                     </button>

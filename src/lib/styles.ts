@@ -5,4 +5,4 @@ export const labelClass =
   "block text-[12px] font-medium text-[#6e6e73] uppercase tracking-widest mb-2"
 
 export const submitButtonClass =
-  "w-full bg-[#1d1d1f] dark:bg-[#f5f5f7] text-white dark:text-[#1d1d1f] text-[15px] font-medium rounded-xl py-3.5 transition-colors hover:bg-[#3d3d3f] dark:hover:bg-[#e5e5ea] disabled:opacity-60 disabled:cursor-not-allowed"
+  "w-full card bg-[#1d1d1f] dark:bg-[#f5f5f7] text-white dark:text-[#1d1d1f] text-[15px] font-medium rounded-xl py-3.5 transition hover:elevated hover:bg-[#3d3d3f] dark:hover:bg-[#e5e5ea] disabled:opacity-60 disabled:cursor-not-allowed"

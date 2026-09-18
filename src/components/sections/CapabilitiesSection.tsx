@@ -88,7 +88,7 @@ export default function CapabilitiesSection() {
           <motion.article
             key={capability.title}
             variants={fadeUp}
-            className={`relative flex flex-col justify-between overflow-hidden border border-[#d2d2d7]/70 bg-[#fafafa] p-5 dark:border-[#3b3c40]/70 dark:bg-[#242528] sm:p-8 ${
+            className={`card relative flex flex-col justify-between overflow-hidden border border-[#d2d2d7]/70 bg-[#fafafa] p-5 dark:border-[#3b3c40]/70 dark:bg-[#242528] sm:p-8 ${
               index === 0
                 ? "min-h-0 border-t-2 border-t-[#2f6bff] dark:border-t-[#ffb86b] md:row-span-2 md:min-h-96"
                 : "min-h-0 sm:min-h-56"

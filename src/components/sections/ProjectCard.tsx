@@ -19,7 +19,7 @@ export default function ProjectCard({
       role="button"
       tabIndex={0}
       aria-label={`Open case study for ${project.title}`}
-      className="group grid cursor-pointer grid-cols-1 gap-0 rounded-2xl border border-[#d2d2d7]/60 bg-[#fafafa] will-change-transform focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2f6bff] dark:border-[#3b3c40]/70 dark:bg-[#242528] lg:grid-cols-[1fr_380px]"
+      className="group grid cursor-pointer grid-cols-1 gap-0 rounded-2xl border border-[#d2d2d7]/60 card transition-shadow bg-[#fafafa] will-change-transform focus-visible:outline-none focus-visible:shadow-[0_0_0_4px_rgba(47,107,255,0.3)] hover:elevated dark:border-[#3b3c40]/70 dark:bg-[#242528] lg:grid-cols-[1fr_380px]"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}

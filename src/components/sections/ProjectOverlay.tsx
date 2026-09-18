@@ -30,7 +30,7 @@ export default function ProjectOverlay({
         role="dialog"
         aria-modal="true"
         aria-labelledby={`project-dialog-title-${project.id}`}
-        className="fixed inset-x-0 z-110 mx-auto flex w-[calc(100vw-2rem)] max-h-[85vh] flex-col overflow-hidden rounded-3xl bg-white shadow-2xl will-change-transform dark:bg-[#242528] sm:w-[min(680px,92vw)]"
+        className="elevated fixed inset-x-0 z-110 mx-auto flex w-[calc(100vw-2rem)] max-h-[85vh] flex-col overflow-hidden rounded-3xl bg-white will-change-transform dark:bg-[#242528] sm:w-[min(680px,92vw)]"
         style={{ top: "4vh", originX: 0.5, originY: 0 }}
       >
         <button

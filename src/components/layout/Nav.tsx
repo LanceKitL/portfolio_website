@@ -19,6 +19,7 @@ const TRACKED_SECTIONS = [
 
 export default function Nav({ dark, onToggleDark }: NavProps) {
   const [activeNav, setActiveNav] = useState("")
+  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -29,6 +30,8 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
       const scrollY = window.scrollY
       const scrollBottom = window.innerHeight + scrollY
       const docHeight = document.documentElement.scrollHeight
+
+      setScrolled(scrollY > 12)
 
       // 1. When reaching the very bottom of the page, activate Contact
       if (scrollBottom >= docHeight - 60) {
@@ -161,13 +164,15 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
 
   return (
     <motion.nav
-      className="fixed left-0 right-0 top-0 z-50 border-b border-[#e5e5ea] bg-white px-4 backdrop-blur-xl dark:border-[#2a2b2e] dark:bg-[#17181a] sm:px-7 lg:px-0"
+      className={`fixed left-0 right-0 top-0 z-50 border-b border-[#e5e5ea] bg-white px-4 transition-shadow dark:border-[#2a2b2e] dark:bg-[#17181a] sm:px-7 lg:px-0 ${
+        scrolled ? "elevated" : ""
+      }`}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease }}
     >
       {/* Blur content as it passes beneath the floating nav */}
-      <div className="pointer-events-none absolute inset-x-0 -bottom-14 z-10 h-14 bg-transparent backdrop-blur-[40px]" />
+      <div className="pointer-events-none absolute inset-x-0 -bottom-14 z-10 h-14 bg-transparent backdrop-blur-[40px] [mask-image:linear-gradient(to_bottom,black,transparent)]" />
 
       <div className="max-w-5xl mx-auto min-h-14 py-2 flex items-center justify-between gap-4">
         <a
@@ -179,13 +184,12 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
           <div>
             <img
               src="/WEB_PIC.png"
-              width="30"
+              width="36"
               loading="lazy"
               className="rounded-lg"
               alt="logo"
             />
           </div>
-          <span className="text-[15px] font-bold tracking-tight">Kit</span>
         </a>
 
         <div className="flex items-center justify-end gap-3 sm:gap-5 lg:gap-8">
@@ -201,10 +205,10 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
                     href={`#${link.toLowerCase()}`}
                     onClick={() => selectNav(link)}
                     aria-current={isActive ? "true" : undefined}
-                    className={`rounded-full px-4 py-2 text-[12px] sm:text-[13px] font-medium text-white transition-all ${
+                    className={`card rounded-full px-4 py-2 text-[12px] sm:text-[13px] font-semibold text-white transition-all hover:elevated ${
                       isActive
-                        ? "bg-[#000000] ring-2 ring-[#1d1d1f]/20 dark:bg-[#f2efe8] dark:text-[#17181a] dark:ring-[#ffb86b]/30"
-                        : "bg-[#1d1d1f] hover:bg-[#424245] dark:bg-[#2a2b2e] dark:text-[#f2efe8] dark:hover:bg-[#35363a]"
+                        ? "bg-[#2f6bff] ring-2 ring-[#2f6bff]/25 dark:bg-[#ffb86b] dark:text-[#17181a] dark:ring-[#ffb86b]/30"
+                        : "bg-[#2f6bff] hover:bg-[#1d4ed8] dark:bg-[#ffb86b] dark:text-[#17181a] dark:hover:bg-[#ffcf8a]"
                     }`}
                   >
                     {link}

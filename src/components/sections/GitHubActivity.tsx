@@ -12,7 +12,7 @@ export default function GitHubActivity() {
 
   return (
     <motion.article
-      className="group overflow-hidden rounded-2xl border border-[#d2d2d7]/60 bg-[#fafafa] dark:border-[#3b3c40]/70 dark:bg-[#242528]"
+      className="group card overflow-hidden rounded-2xl border border-[#d2d2d7]/60 bg-[#fafafa] dark:border-[#3b3c40]/70 dark:bg-[#242528]"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}

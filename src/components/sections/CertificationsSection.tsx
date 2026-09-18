@@ -26,7 +26,7 @@ export default function CertificationsSection() {
           <motion.article
             key={certification.name}
             variants={fadeUp}
-            className="overflow-hidden border border-[#d2d2d7]/70 bg-[#fafafa] dark:border-[#3b3c40]/70 dark:bg-[#242528]"
+            className="card overflow-hidden border border-[#d2d2d7]/70 bg-[#fafafa] dark:border-[#3b3c40]/70 dark:bg-[#242528]"
           >
             <div className="grid gap-0 sm:grid-cols-[minmax(220px,0.8fr)_1.2fr]">
               <div className="border-b border-[#d2d2d7]/70 bg-[#eef2f5] p-4 dark:border-[#4a4b50]/70 dark:bg-[#1d1e20] sm:border-b-0 sm:border-r sm:p-6">

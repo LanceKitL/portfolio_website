@@ -35,9 +35,9 @@ export default function Hero() {
           <div className="flex flex-wrap gap-3 mb-8 sm:mb-10">
             <a
               href="#projects"
-              className="rounded-full bg-[#1d1d1f] px-5 py-3 text-[13px] font-medium text-white transition-colors hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
+              className="rounded-full bg-[#1d1d1f] px-5 py-3 text-[13px] font-semibold text-white transition-colors hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
             >
-              See the systems
+              Projects
             </a>
             <a
               href="#contact"
@@ -86,10 +86,10 @@ export default function Hero() {
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white">
                 <div>
                   <p className="mt-1 text-[18px] font-semibold">
-                    Making the invisible usable.
+                    Lance Kit
                   </p>
                   <div className="flex items-center justify-between pb-1 text-[11px] text-[#6b7782] dark:text-[#aaa69e]">
-                    <span>Interface / System / Motion</span>
+                    <span>I shine where problem lives</span>
                   </div>
                 </div>
               </div>
