@@ -22,11 +22,11 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
           transition={{ duration: 0.55, ease }}
         >
           <h2 className="text-[34px] font-bold tracking-[-0.02em] mb-4">
-            Get in touch
+            Have a workflow that feels harder than it should?
           </h2>
           <p className="text-[17px] text-[#6e6e73] leading-relaxed mb-10 max-w-sm">
-            Open to part-time roles and project-based collaborations. Let's
-            build something together.
+            I am open to part-time product work, internal tools, and focused MVP
+            builds. Tell me what is getting in the way.
           </p>
           <ContactLinks />
         </motion.div>
@@ -82,7 +82,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                     ? "confirm-message-title"
                     : "message-sent-title"
                 }
-                className="pointer-events-auto max-h-[calc(100dvh-2rem)] w-[min(520px,100%)] overflow-y-auto rounded-3xl bg-white p-6 text-center shadow-2xl dark:bg-[#0d0d0d] sm:p-8"
+                className="pointer-events-auto max-h-[calc(100dvh-2rem)] w-[min(520px,100%)] overflow-y-auto rounded-3xl bg-white p-6 text-center shadow-2xl dark:bg-[#242528] sm:p-8"
                 initial={{ opacity: 0, scale: 0.92, y: 18 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: 10 }}
@@ -96,7 +96,7 @@ export default function ContactSection({ onSuccess }: ContactSectionProps) {
                     <p className="mb-6 text-[14px] text-[#6e6e73]">
                       Please confirm that you want to send your message.
                     </p>
-                    <div className="mb-6 space-y-3 rounded-2xl bg-[#f5f5f7] p-4 text-left dark:bg-[#1c1c1e]">
+                    <div className="mb-6 space-y-3 rounded-2xl bg-[#f5f5f7] p-4 text-left dark:bg-[#303135]">
                       <div>
                         <div className="text-[11px] font-semibold uppercase tracking-widest text-[#6e6e73]">
                           From

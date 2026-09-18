@@ -111,11 +111,14 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
 
   return (
     <motion.nav
-      className="fixed px-4 sm:px-7 lg:px-0 top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#000000]/80 backdrop-blur-xl border-b border-[#d2d2d7]/60 dark:border-[#424245]/60"
+      className="fixed left-0 right-0 top-0 z-50 border-b border-[#d2d2d7]/60 bg-white/80 px-4 backdrop-blur-xl dark:border-[#3b3c40]/60 dark:bg-[#17181a]/85 sm:px-7 lg:px-0"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease }}
     >
+      {/* Blur content as it passes beneath the floating nav */}
+      <div className="pointer-events-none absolute inset-x-0 -bottom-14 z-10 h-14 bg-gradient-to-b from-white/60 via-white/25 to-transparent  backdrop-blur-[40px] dark:from-[#17181a]/70 dark:via-[#17181a]/30 dark:to-transparent" />
+
       <div className="max-w-5xl mx-auto min-h-14 py-2 flex items-center justify-between gap-4">
         <a
           href="#"
@@ -150,8 +153,8 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
                     aria-current={isActive ? "true" : undefined}
                     className={`rounded-full px-4 py-2 text-[12px] sm:text-[13px] font-medium text-white transition-all ${
                       isActive
-                        ? "bg-[#000000] ring-2 ring-[#1d1d1f]/20 dark:bg-white dark:text-[#1d1d1f] dark:ring-white/20"
-                        : "bg-[#1d1d1f] hover:bg-[#424245] dark:bg-[#1c1c1e] dark:text-white dark:hover:bg-[#2c2c2e]"
+                        ? "bg-[#000000] ring-2 ring-[#1d1d1f]/20 dark:bg-[#f2efe8] dark:text-[#17181a] dark:ring-[#ffb86b]/30"
+                        : "bg-[#1d1d1f] hover:bg-[#424245] dark:bg-[#2a2b2e] dark:text-[#f2efe8] dark:hover:bg-[#35363a]"
                     }`}
                   >
                     {link}
@@ -180,7 +183,7 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
           <motion.button
             onClick={onToggleDark}
             aria-label="Toggle dark mode"
-            className="w-8 h-8 rounded-full flex items-center justify-center bg-[#f5f5f7] dark:bg-[#1c1c1e] text-[#6e6e73] dark:text-[#98989d] hover:bg-[#e5e5ea] dark:hover:bg-[#2c2c2e] transition-colors"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f5f5f7] text-[#6e6e73] transition-colors hover:bg-[#e5e5ea] dark:bg-[#2a2b2e] dark:text-[#aaa69e] dark:hover:bg-[#35363a]"
             whileTap={{ scale: 0.88, rotate: 12 }}
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -230,6 +233,13 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
             </AnimatePresence>
           </motion.button>
 
+          {activeNav && (
+            <span className="hidden items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#f05a28] dark:text-[#ffb86b] sm:hidden">
+              <span className="h-1.5 w-1.5 rounded-full bg-current" />
+              {activeNav}
+            </span>
+          )}
+
           <motion.button
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
@@ -253,7 +263,7 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
         {menuOpen && (
           <>
             <motion.div
-              className="fixed inset-0 top-14 z-[-1] bg-black/25 dark:bg-black/50 backdrop-blur-[2px] sm:hidden"
+              className="fixed inset-0 top-14 z-[-1] bg-black/25 dark:bg-black/50 backdrop-blur-[10px] sm:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -281,11 +291,11 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
                       onClick={() => selectNav(link)}
                       aria-current={isActive ? "true" : undefined}
                       className={`rounded-xl px-4 py-3 text-[14px] font-medium transition-colors ${
-                        isContact
-                          ? "bg-[#1d1d1f] text-white hover:bg-[#424245] dark:bg-[#1c1c1e] dark:text-white dark:hover:bg-[#2c2c2e]"
-                          : isActive
-                            ? "bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#1c1c1e] dark:text-[#f5f5f7]"
-                            : "text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#1d1d1f] dark:hover:bg-[#1c1c1e] dark:hover:text-[#f5f5f7]"
+                        isActive
+                          ? isContact
+                            ? "bg-[#1d1d1f] text-white ring-1 ring-[#f05a28]/30 dark:bg-[#f2efe8] dark:text-[#17181a] dark:ring-[#ffb86b]/35"
+                            : "bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#303135] dark:text-[#ffb86b] dark:ring-1 dark:ring-[#ffb86b]/25"
+                          : "text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#1d1d1f] dark:hover:bg-[#303135] dark:hover:text-[#f2efe8]"
                       }`}
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}

@@ -4,12 +4,13 @@ import { ease } from "@/lib/animations"
 interface SectionHeadingProps {
   title: string
   meta: string
+  className?: string
 }
 
-export default function SectionHeading({ title, meta }: SectionHeadingProps) {
+export default function SectionHeading({ title, meta, className = "" }: SectionHeadingProps) {
   return (
     <motion.div
-      className="flex items-baseline justify-between mb-16"
+      className={`mb-16 flex items-baseline justify-between ${className}`}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
