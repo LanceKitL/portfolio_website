@@ -52,7 +52,7 @@ export default function ProjectCard({
           >
             {project.title}
           </motion.h3>
-          <div className="mt-6 border-l-2 border-[#f05a28] pl-3 dark:border-[#ffb86b] sm:mt-8 sm:pl-4">
+          <div className="mt-6 border-l-2 border-[#2885f0] pl-3 dark:border-[#ffb86b] sm:mt-8 sm:pl-4">
             <p className="mb-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#6e6e73] dark:text-[#aaa69e]">
               Overview
             </p>
