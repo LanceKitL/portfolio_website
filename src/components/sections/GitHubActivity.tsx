@@ -12,7 +12,7 @@ export default function GitHubActivity() {
 
   return (
     <motion.article
-      className="group rounded-2xl border border-[#d2d2d7]/60 dark:border-[#424245]/60 bg-[#fafafa] dark:bg-[#0d0d0d] overflow-hidden"
+      className="group overflow-hidden rounded-2xl border border-[#d2d2d7]/60 bg-[#fafafa] dark:border-[#3b3c40]/70 dark:bg-[#242528]"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -40,7 +40,7 @@ export default function GitHubActivity() {
 
         <div className="w-full pb-1">
           {lightImageError && darkImageError ? (
-              <div className="min-h-24 flex items-center justify-center border border-dashed border-[#d2d2d7] dark:border-[#424245] rounded-xl px-6 text-center text-[12px] text-[#6e6e73]">
+              <div className="flex min-h-24 items-center justify-center rounded-xl border border-dashed border-[#d2d2d7] px-6 text-center text-[12px] text-[#6e6e73] dark:border-[#4a4b50] dark:text-[#aaa69e]">
                 Activity will appear here when the snk workflow publishes the contribution SVG.
               </div>
           ) : (

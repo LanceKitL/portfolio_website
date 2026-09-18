@@ -5,34 +5,44 @@ import { ease, fadeUp, staggerContainer } from "@/lib/animations"
 
 export default function Hero() {
   return (
-    <section className="w-full pt-28 sm:pt-36 pb-20 sm:pb-28 px-5 sm:px-6 bg-[#f5f5f7] dark:bg-[#0a0a0a]">
-      <div className="max-w-5xl mx-auto flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between gap-12 lg:gap-16">
+    <section className="w-full rounded-r-4xl rounded-l-4xl lg:grid lg:place-items-center lg:h-dvh overflow-hidden bg-[#eef2f5] px-5 pb-20 pt-20 dark:bg-[#1d1e20] sm:px-6 sm:pb-28 sm:pt-36">
+      <div className="mx-auto flex max-w-5xl flex-col-reverse gap-14 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div className="flex-1">
-          <div className="mb-6">
+          <div className="mb-7">
+            <p className="mb-5 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#2f6bff] dark:text-[#ffb86b]">
+              Software Engineer / Quezon City
+            </p>
             <BlurText
-              text="Developer & Designer."
+              text="I build software"
               delay={80}
-              className="text-[40px] sm:text-[56px] font-bold leading-[1.05] tracking-[-0.03em]"
+              className="text-[42px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-[62px]"
               direction="bottom"
               stepDuration={0.4}
             />
             <BlurText
-              text="Builder at heart."
+              text="behind real work."
               delay={80}
-              className="text-[40px] sm:text-[56px] font-bold leading-[1.05] tracking-[-0.03em] text-[#6e6e73]"
+              className="text-[42px] font-bold leading-[1.02] tracking-[-0.04em] text-[#2f6bff] sm:text-[62px] dark:text-[#ffb86b]"
               direction="bottom"
               stepDuration={0.4}
               animationFrom={{ filter: "blur(10px)", opacity: 0, y: 30 }}
             />
           </div>
 
-          <BlurText
-            text="I build full-stack web apps with clean, thoughtful interfaces. Based in Quezon City, Philippines."
-            delay={40}
-            className="text-[16px] sm:text-[17px] text-[#6e6e73] leading-relaxed max-w-md mb-8 sm:mb-10"
-            direction="bottom"
-            stepDuration={0.3}
-          />
+          <div className="flex flex-wrap gap-3 mb-8 sm:mb-10">
+            <a
+              href="#projects"
+              className="rounded-full bg-[#1d1d1f] px-5 py-3 text-[13px] font-medium text-white transition-colors hover:bg-[#424245] dark:bg-[#f5f5f7] dark:text-[#1d1d1f] dark:hover:bg-[#d2d2d7]"
+            >
+              See the systems
+            </a>
+            <a
+              href="#contact"
+              className="rounded-full border border-[#d2d2d7] px-5 py-3 text-[13px] font-medium text-[#6e6e73] transition-colors hover:bg-white dark:border-[#424245] dark:hover:bg-[#1c1c1e]"
+            >
+              Start a conversation
+            </a>
+          </div>
 
           <motion.div
             className="flex flex-wrap gap-2"
@@ -45,7 +55,7 @@ export default function Hero() {
               <motion.span
                 key={s}
                 variants={fadeUp}
-                className="text-[12px] font-medium text-[#6e6e73] dark:text-[#98989d] bg-white dark:bg-[#1c1c1e] px-3 py-1.5 rounded-full"
+                className="rounded-full bg-white px-3 py-1.5 text-[12px] font-medium text-[#6e6e73] dark:bg-[#2a2b2e] dark:text-[#b8b5ae]"
               >
                 {s}
               </motion.span>
@@ -54,33 +64,31 @@ export default function Hero() {
         </div>
 
         <motion.div
-          className="w-full lg:w-70 text-center shrink-0 justify-center items-center"
+          className="w-full shrink-0 lg:w-[25rem]"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.25, ease }}
         >
-          <div className="w-full max-w-77.5 aspect-31/24 rounded-4xl overflow-hidden bg-[#CECECE] dark:bg-[#CECECE] mx-auto lg:mx-0">
-            <video
-              src="/01.mp4"
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="text-sm lg:text-center lg:w-77.5 max-w-77.5 mx-auto lg:mx-0 mt-4">
-            I am currently taking
-            <b>
-              <span className="text-[#4286F5]"> G</span>
-              <span className="text-[#DC4437]">o</span>
-              <span className="text-[#F5B400]">o</span>
-              <span className="text-[#4286F5]">g</span>
-              <span className="text-[#109D58]">l</span>
-              <span className="text-[#DC4437]">e </span>
-              Data Analytics
-            </b>
-            .
+          <div className="overflow-hidden rounded-[2rem] border border-[#cbd5df] bg-[#f8fafb] p-3 shadow-[0_24px_70px_rgba(27,45,62,0.12)] dark:border-[#3b3c40] dark:bg-[#242528] dark:shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
+            <div className="relative aspect-[31/24] overflow-hidden rounded-[1.45rem] bg-[#2b2c30]">
+              <video
+                src="/01.mp4"
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                className="h-full w-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#17181a]/75 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white">
+                <div>
+                  <p className="mt-1 text-[18px] font-semibold">Making the invisible usable.</p>
+                  <div className="flex items-center justify-between pb-1 text-[11px] text-[#6b7782] dark:text-[#aaa69e]">
+                    <span>Interface / System / Motion</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
