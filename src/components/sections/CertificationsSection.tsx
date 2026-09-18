@@ -5,7 +5,10 @@ import { fadeUp, staggerContainer } from "@/lib/animations"
 
 export default function CertificationsSection() {
   return (
-    <section id="certifications" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-14 sm:py-20">
+    <section
+      id="certifications"
+      className="mx-auto max-w-5xl px-6 py-14 sm:py-20"
+    >
       <SectionHeading
         title="Credentials in motion"
         meta="Learning alongside shipping"

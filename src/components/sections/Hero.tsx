@@ -5,7 +5,10 @@ import { ease, fadeUp, staggerContainer } from "@/lib/animations"
 
 export default function Hero() {
   return (
-    <section className="w-full rounded-r-4xl rounded-l-4xl lg:grid lg:place-items-center lg:h-dvh overflow-hidden bg-[#eef2f5] px-5 pb-20 pt-20 dark:bg-[#1d1e20] sm:px-6 sm:pb-28 sm:pt-36">
+    <section
+      id="hero"
+      className="w-full rounded-r-4xl rounded-l-4xl lg:grid lg:place-items-center lg:h-dvh overflow-hidden bg-[#eef2f5] px-5 pb-20 pt-20 dark:bg-[#1d1e20] sm:px-6 sm:pb-28 sm:pt-36"
+    >
       <div className="mx-auto flex max-w-5xl flex-col-reverse gap-14 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div className="flex-1">
           <div className="mb-7">
@@ -82,7 +85,9 @@ export default function Hero() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#17181a]/75 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white">
                 <div>
-                  <p className="mt-1 text-[18px] font-semibold">Making the invisible usable.</p>
+                  <p className="mt-1 text-[18px] font-semibold">
+                    Making the invisible usable.
+                  </p>
                   <div className="flex items-center justify-between pb-1 text-[11px] text-[#6b7782] dark:text-[#aaa69e]">
                     <span>Interface / System / Motion</span>
                   </div>

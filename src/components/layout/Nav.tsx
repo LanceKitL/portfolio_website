@@ -8,69 +8,105 @@ interface NavProps {
   onToggleDark: () => void
 }
 
+const TRACKED_SECTIONS = [
+  { id: "hero", name: "" },
+  { id: "projects", name: "Projects" },
+  { id: "achievements", name: "Achievements" },
+  { id: "certifications", name: "Certifications" },
+  { id: "capabilities", name: "Capabilities" },
+  { id: "contact", name: "Contact" },
+] as const
+
 export default function Nav({ dark, onToggleDark }: NavProps) {
   const [activeNav, setActiveNav] = useState("")
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((link) => ({
-      link,
-      element: document.getElementById(link.toLowerCase()),
-    })).filter(
-      (section): section is { link: string; element: HTMLElement } =>
-        section.element !== null,
-    )
-    let frame = 0
+    let ticking = false
 
     const updateActiveSection = () => {
-      frame = 0
+      ticking = false
       const scrollY = window.scrollY
       const scrollBottom = window.innerHeight + scrollY
       const docHeight = document.documentElement.scrollHeight
 
-      // When reaching near the bottom of the page, activate Contact
-      if (scrollBottom >= docHeight - 80) {
+      // 1. When reaching the very bottom of the page, activate Contact
+      if (scrollBottom >= docHeight - 60) {
         setActiveNav("Contact")
         return
       }
 
-      const navOffset = 120
-      const firstSection = sections[0]
-      // When at the top (Hero section), no nav link should be highlighted
-      if (firstSection) {
-        const firstTop = firstSection.element.getBoundingClientRect().top + scrollY
-        if (scrollY + navOffset < firstTop) {
-          setActiveNav("")
-          return
+      // 2. When at the top of the page (Hero section), no nav link should be active
+      if (scrollY < 80) {
+        setActiveNav("")
+        return
+      }
+
+      // 3. Check section positions relative to the reading line below navbar
+      const nav = document.querySelector("nav")
+      const navHeight = nav ? nav.offsetHeight : 64
+      const readingLine = navHeight + 80
+
+      for (let i = TRACKED_SECTIONS.length - 1; i >= 0; i--) {
+        const { id, name } = TRACKED_SECTIONS[i]
+        const el = document.getElementById(id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= readingLine) {
+            setActiveNav(name)
+            return
+          }
         }
       }
 
-      // Find the current section in view
-      const scrollPosition = scrollY + navOffset
-      const currentSection = sections.reduce<typeof sections[0] | null>((current, section) => {
-        const sectionTop = section.element.getBoundingClientRect().top + scrollY
-        return sectionTop <= scrollPosition ? section : current
-      }, null)
+      setActiveNav("")
+    }
 
-      if (currentSection) {
-        setActiveNav(currentSection.link)
-      } else {
-        setActiveNav("")
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection)
+        ticking = true
       }
     }
 
-    const handleScroll = () => {
-      if (frame === 0) frame = window.requestAnimationFrame(updateActiveSection)
+    // Set up IntersectionObserver on all tracked section IDs
+    const observer = new IntersectionObserver(
+      () => {
+        updateActiveSection()
+      },
+      {
+        rootMargin: "-80px 0px -40% 0px",
+        threshold: [0, 0.2, 0.5, 0.8],
+      },
+    )
+
+    TRACKED_SECTIONS.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    // Compute initial active section
+    updateActiveSection()
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+
+    // Handle initial hash in URL if present (content mounts after the loader,
+    // so the browser has not been able to jump to the fragment on its own)
+    if (window.location.hash) {
+      const targetId = window.location.hash.replace("#", "")
+      const el = document.getElementById(targetId)
+      if (el) {
+        window.setTimeout(() => {
+          el.scrollIntoView({ block: "start", behavior: "auto" })
+        }, 0)
+      }
     }
 
-    updateActiveSection()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", handleScroll)
-
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleScroll)
-      if (frame) window.cancelAnimationFrame(frame)
+      observer.disconnect()
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
     }
   }, [])
 
@@ -97,27 +133,41 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
     }
   }, [menuOpen])
 
+  function closeMenuAfterScroll() {
+    let closed = false
+    const finish = () => {
+      if (closed) return
+      closed = true
+      window.removeEventListener("scrollend", finish)
+      window.clearTimeout(timer)
+      setMenuOpen(false)
+    }
+    const timer = window.setTimeout(finish, 1400)
+    window.addEventListener("scrollend", finish)
+  }
+
   function selectNav(link: string) {
     setActiveNav(link)
-    setMenuOpen(false)
+    if (menuOpen) closeMenuAfterScroll()
   }
 
   function handleLogoClick(e: React.MouseEvent) {
     e.preventDefault()
-    window.scrollTo({ top: 0, behavior: "smooth" })
     setActiveNav("")
-    history.pushState(null, "", " ")
+    document.getElementById("hero")?.scrollIntoView({ block: "start" })
+    history.pushState(null, "", window.location.pathname)
+    if (menuOpen) closeMenuAfterScroll()
   }
 
   return (
     <motion.nav
-      className="fixed left-0 right-0 top-0 z-50 border-b border-[#d2d2d7]/60 bg-white/80 px-4 backdrop-blur-xl dark:border-[#3b3c40]/60 dark:bg-[#17181a]/85 sm:px-7 lg:px-0"
+      className="fixed left-0 right-0 top-0 z-50 border-b border-[#e5e5ea] bg-white px-4 backdrop-blur-xl dark:border-[#2a2b2e] dark:bg-[#17181a] sm:px-7 lg:px-0"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease }}
     >
       {/* Blur content as it passes beneath the floating nav */}
-      <div className="pointer-events-none absolute inset-x-0 -bottom-14 z-10 h-14 bg-gradient-to-b from-white/60 via-white/25 to-transparent  backdrop-blur-[40px] dark:from-[#17181a]/70 dark:via-[#17181a]/30 dark:to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 -bottom-14 z-10 h-14 bg-transparent backdrop-blur-[40px]" />
 
       <div className="max-w-5xl mx-auto min-h-14 py-2 flex items-center justify-between gap-4">
         <a
@@ -244,7 +294,9 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={
+              menuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
             className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f5f5f7] text-[#6e6e73] transition-colors hover:bg-[#e5e5ea] dark:bg-[#1c1c1e] dark:text-[#98989d] dark:hover:bg-[#2c2c2e] sm:hidden"
             whileTap={{ scale: 0.88 }}
           >
@@ -263,7 +315,7 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
         {menuOpen && (
           <>
             <motion.div
-              className="fixed inset-0 top-14 z-[-1] bg-black/25 dark:bg-black/50 backdrop-blur-[10px] sm:hidden"
+              className="fixed inset-0 top-14 z-[-1] bg-white/85 backdrop-blur-[10px] dark:bg-[#17181a]/85 sm:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -273,7 +325,7 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
             />
             <motion.div
               id="mobile-navigation"
-              className="border-t border-[#d2d2d7]/60 py-3 dark:border-[#424245]/60 sm:hidden"
+              className="border-t border-[#e5e5ea] bg-white py-3 dark:border-[#2a2b2e] dark:bg-[#17181a] sm:hidden"
               initial={{ opacity: 0, height: 0, y: -8 }}
               animate={{ opacity: 1, height: "auto", y: 0 }}
               exit={{ opacity: 0, height: 0, y: -8 }}
@@ -293,9 +345,9 @@ export default function Nav({ dark, onToggleDark }: NavProps) {
                       className={`rounded-xl px-4 py-3 text-[14px] font-medium transition-colors ${
                         isActive
                           ? isContact
-                            ? "bg-[#1d1d1f] text-white ring-1 ring-[#f05a28]/30 dark:bg-[#f2efe8] dark:text-[#17181a] dark:ring-[#ffb86b]/35"
-                            : "bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#303135] dark:text-[#ffb86b] dark:ring-1 dark:ring-[#ffb86b]/25"
-                          : "text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#1d1d1f] dark:hover:bg-[#303135] dark:hover:text-[#f2efe8]"
+                            ? "bg-[#1d1d1f] text-white shadow-sm ring-1 ring-[#f05a28]/25 dark:bg-[#f2efe8] dark:text-[#17181a] dark:ring-[#ffb86b]/30"
+                            : "bg-[#f5f5f7] text-[#1d1d1f] dark:bg-[#2a2b2e] dark:text-[#f2efe8]"
+                          : "text-[#6e6e73] hover:bg-[#f5f5f7] hover:text-[#1d1d1f] dark:text-[#aaa69e] dark:hover:bg-[#2a2b2e] dark:hover:text-[#f2efe8]"
                       }`}
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
