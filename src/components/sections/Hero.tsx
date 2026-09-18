@@ -13,21 +13,21 @@ export default function Hero() {
         <div className="flex-1">
           <div className="mb-7">
             <p className="mb-5 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#2f6bff] dark:text-[#ffb86b]">
-              Software Engineer / Quezon City
+              SWE / UI/UX  | Quezon City
             </p>
             <BlurText
               text="I build software"
               delay={80}
-              className="text-[42px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-[62px]"
+              className="text-[42px] font-bold leading-[1.02] tracking-[-0.04em] sm:text-[70px]"
               direction="bottom"
-              stepDuration={0.4}
+              stepDuration={0.2}
             />
             <BlurText
-              text="behind real work."
+              text="behind real work"
               delay={80}
-              className="text-[42px] font-bold leading-[1.02] tracking-[-0.04em] text-[#2f6bff] sm:text-[62px] dark:text-[#ffb86b]"
+              className="text-[42px] font-serif font-bold leading-[1.02] tracking-[-0.04em] text-[#2f6bff] sm:text-[126px] dark:text-[#ffb86b]"
               direction="bottom"
-              stepDuration={0.4}
+              stepDuration={0.2}
               animationFrom={{ filter: "blur(10px)", opacity: 0, y: 30 }}
             />
           </div>
@@ -52,7 +52,7 @@ export default function Hero() {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            transition={{ delayChildren: 0.4 }}
+            transition={{ delayChildren: 0.3 }}
           >
             {SKILLS.map((s) => (
               <motion.span

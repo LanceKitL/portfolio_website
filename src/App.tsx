@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useScroll } from "motion/react"
+import { stagger, useScroll } from "motion/react"
 import ConfettiLayer from "@/components/ConfettiLayer"
 import Footer from "@/components/layout/Footer"
 import Nav from "@/components/layout/Nav"

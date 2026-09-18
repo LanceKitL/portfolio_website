@@ -9,7 +9,7 @@ export default function AchievementsSection() {
 
   return (
     <section id="achievements" className="py-28 px-6 max-w-5xl mx-auto">
-      <SectionHeading title="Proof of practice" meta="How the work has developed" />
+      <SectionHeading title="Proof of practice" meta="pure hardwork" />
 
       <motion.div
         className="relative grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-6"

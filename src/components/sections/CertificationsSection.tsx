@@ -11,7 +11,7 @@ export default function CertificationsSection() {
     >
       <SectionHeading
         title="Credentials in motion"
-        meta="Learning alongside shipping"
+        meta="certs"
         className="mb-10 sm:mb-16"
       />
 
