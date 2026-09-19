@@ -106,7 +106,7 @@ export default function ProjectOverlay({
             <div className="mb-7 grid grid-cols-3 gap-2 border-y border-[#d2d2d7]/60 py-5 dark:border-[#4a4b50]/70">
               {project.metrics.map((metric) => (
                 <div key={metric.label} className="min-w-0 px-2 first:pl-0 last:pr-0">
-                  <p className="font-display text-[24px] font-bold tracking-[-0.03em] text-[#f05a28] dark:text-[#ffb86b] sm:text-[28px]">
+                  <p className="font-display text-[24px] font-bold tracking-[-0.03em] text-[#2f6bff] dark:text-[#ffb86b] sm:text-[28px]">
                     {metric.value}
                   </p>
                   <p className="mt-1 text-[10px] font-medium uppercase leading-snug tracking-[0.08em] text-[#6e6e73] dark:text-[#aaa69e]">

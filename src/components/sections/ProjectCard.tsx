@@ -48,7 +48,7 @@ export default function ProjectCard({
           </div>
           <motion.h3
             layoutId={`card-title-${project.id}`}
-            className="mb-2 text-[25px] font-bold tracking-[-0.02em] sm:mb-3 sm:text-[28px]"
+            className="mb-2 text-[25px] font-bold tracking-[-0.02em] sm:mb-3 sm:text-[40px]"
           >
             {project.title}
           </motion.h3>

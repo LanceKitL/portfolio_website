@@ -25,7 +25,7 @@ export default function Hero() {
             <BlurText
               text="behind real work"
               delay={80}
-              className="text-[42px] font-serif font-bold leading-[1.02] tracking-[-0.04em] text-[#2f6bff] sm:text-[126px] dark:text-[#ffb86b]"
+              className="text-[42px] md:text-[100px] font-serif font-bold leading-[1.02] tracking-[-0.04em] text-[#2f6bff] sm:text-[126px] dark:text-[#ffb86b]"
               direction="bottom"
               stepDuration={0.2}
               animationFrom={{ filter: "blur(10px)", opacity: 0, y: 30 }}
