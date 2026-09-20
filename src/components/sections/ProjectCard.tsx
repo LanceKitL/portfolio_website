@@ -1,6 +1,6 @@
 import { motion } from "motion/react"
 import type { Project } from "@/data/content"
-import { ease } from "@/lib/animations"
+import { ease, layoutTransition } from "@/lib/animations"
 
 interface ProjectCardProps {
   project: Project
@@ -145,6 +145,7 @@ export default function ProjectCard({
       </div>
       <motion.div
         layoutId={`card-image-${project.id}`}
+        transition={{ layout: layoutTransition }}
         className="h-[260px] bg-[#f0f0f5] dark:bg-[#2b2c30] lg:h-full"
       >
         <div className="h-full overflow-hidden rounded-b-2xl lg:rounded-b-none lg:rounded-r-2xl">

@@ -1,6 +1,6 @@
 import { motion } from "motion/react"
 import type { Project } from "@/data/content"
-import { ease } from "@/lib/animations"
+import { ease, layoutTransition } from "@/lib/animations"
 
 interface ProjectOverlayProps {
   project: Project
@@ -19,7 +19,7 @@ export default function ProjectOverlay({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.32, ease }}
         onClick={onClose}
       />
 
@@ -32,6 +32,7 @@ export default function ProjectOverlay({
         aria-labelledby={`project-dialog-title-${project.id}`}
         className="elevated fixed inset-x-0 z-110 mx-auto flex w-[calc(100vw-2rem)] max-h-[85vh] flex-col overflow-hidden rounded-3xl bg-white will-change-transform dark:bg-[#242528] sm:w-[min(680px,92vw)]"
         style={{ top: "4vh", originX: 0.5, originY: 0 }}
+        transition={{ layout: layoutTransition }}
       >
         <button
           onClick={onClose}
@@ -44,6 +45,7 @@ export default function ProjectOverlay({
         {/* Image — stays fixed at top, never scrolls */}
         <motion.div
           layoutId={`card-image-${project.id}`}
+          transition={{ layout: layoutTransition }}
           className="h-65 w-full shrink-0 bg-[#f0f0f5] dark:bg-[#2b2c30]"
         >
           <div className="h-full overflow-hidden rounded-t-3xl">
@@ -52,10 +54,10 @@ export default function ProjectOverlay({
               alt={project.title}
               loading="lazy"
               className="w-full h-full object-cover"
-              initial={{ filter: "blur(6px)", scale: 1.02 }}
-              animate={{ filter: "blur(0px)", scale: 1 }}
-              exit={{ filter: "blur(6px)", scale: 1.02 }}
-              transition={{ duration: 0.35, ease }}
+              initial={{ opacity: 0.88 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 1 }}
+              transition={{ duration: 0.45, ease }}
             />
           </div>
         </motion.div>
@@ -68,10 +70,10 @@ export default function ProjectOverlay({
           <motion.p
             layoutId={`card-category-${project.id}`}
             className="text-[12px] text-[#6e6e73] dark:text-[#98989d] uppercase tracking-widest mb-3"
-            initial={{ filter: "blur(4px)" }}
-            animate={{ filter: "blur(0px)" }}
-            exit={{ filter: "blur(4px)" }}
-            transition={{ duration: 0.3, ease }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.28, ease }}
           >
             {project.category}
           </motion.p>
@@ -79,10 +81,10 @@ export default function ProjectOverlay({
             layoutId={`card-title-${project.id}`}
             id={`project-dialog-title-${project.id}`}
             className="mb-5 text-[28px] font-bold tracking-[-0.02em] sm:text-[32px]"
-            initial={{ filter: "blur(4px)" }}
-            animate={{ filter: "blur(0px)" }}
-            exit={{ filter: "blur(4px)" }}
-            transition={{ duration: 0.3, delay: 0.05, ease }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, delay: 0.04, ease }}
           >
             {project.title}
           </motion.h3>
@@ -118,10 +120,10 @@ export default function ProjectOverlay({
           )}
 
           <motion.div
-            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, filter: "blur(4px)" }}
-            transition={{ duration: 0.3, delay: 0.12, ease }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.36, delay: 0.1, ease }}
           >
             <p className="text-[16px] text-[#6e6e73] leading-relaxed mb-6">
               {project.longDescription}
