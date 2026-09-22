@@ -39,6 +39,7 @@ export default defineConfig(({ mode }) => {
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
       figmaMakeKitPlugin({ storiesGlob: "/src/**/*.stories.{ts,tsx,js,jsx}" }),
+      devPageViewsFallback(),
     ],
     optimizeDeps: {
       include: ["motion/react"],
@@ -362,6 +363,80 @@ function figmaReactRefreshBoundaryFallback(): Plugin {
       }
 
       return null
+    },
+  }
+}
+
+/**
+ * Dev-only fallback for `GET /api/page-views`.
+ *
+ * `api/page-views.ts` is a Vercel serverless function, so it does not exist
+ * under `vite dev` / Figma Make preview and the footer counter would stay
+ * blank locally. This middleware answers the same `{ count }` shape, seeded
+ * once from the real counter via a read-only GET (never `/up`, so dev
+ * traffic does not pollute production stats) with local-only increments on
+ * top. Falls back to 0 when the seed is unreachable or no API key is set.
+ * Prod builds (`vite build`) skip it entirely.
+ */
+function devPageViewsFallback(): Plugin {
+  const COUNTER_URL =
+    "https://api.counterapi.dev/v2/lance-kit-gom-oss-team-5631/first-counter-5631"
+  let devCount: number | null = null
+  let seedPromise: Promise<void> | null = null
+
+  function seedDevCount(): Promise<void> {
+    if (seedPromise) return seedPromise
+    seedPromise = (async () => {
+      try {
+        const apiKey = process.env.COUNTERAPI_API_KEY
+        if (!apiKey) {
+          devCount = 0
+          return
+        }
+        const response = await fetch(COUNTER_URL, {
+          headers: { Authorization: `Bearer ${apiKey}` },
+        })
+        const payload = (await response.json()) as {
+          data?: { up_count?: number }
+        }
+        const seeded = payload?.data?.up_count
+        devCount =
+          typeof seeded === "number" && Number.isFinite(seeded) && seeded >= 0
+            ? seeded
+            : 0
+      } catch {
+        devCount = 0
+      }
+    })()
+    return seedPromise
+  }
+
+  return {
+    name: "dev-page-views-fallback",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const url = req.url || ""
+        const [pathname, search] = url.split("?")
+        if (pathname !== "/api/page-views") return next()
+        if (req.method !== "GET") {
+          res.statusCode = 405
+          res.setHeader("Allow", "GET")
+          res.setHeader("Content-Type", "application/json")
+          res.end(JSON.stringify({ error: "Method not allowed" }))
+          return
+        }
+
+        void seedDevCount().then(() => {
+          const params = new URLSearchParams(search ?? "")
+          if (devCount === null) devCount = 0
+          if (params.get("increment") !== "0") devCount += 1
+
+          res.setHeader("Content-Type", "application/json")
+          res.setHeader("Cache-Control", "no-store")
+          res.end(JSON.stringify({ count: devCount }))
+        })
+      })
     },
   }
 }
