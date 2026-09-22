@@ -17,6 +17,20 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: emitSourcemaps ? "inline" : false,
       minify: !emitSourcemaps,
+      cssCodeSplit: true,
+      assetsInlineLimit: 4096,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) return undefined
+            if (id.includes("motion")) return "motion"
+            if (id.includes("react") || id.includes("scheduler")) {
+              return "react-vendor"
+            }
+            return "vendor"
+          },
+        },
+      },
     },
     plugins: [
       react(),
