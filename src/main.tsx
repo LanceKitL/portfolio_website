@@ -1,14 +1,43 @@
-import React from "react"
+import { StrictMode, useEffect, useState, type ComponentType } from "react"
 import ReactDOM from "react-dom/client"
-import { Analytics } from "@vercel/analytics/react"
 import App from "./App"
 import "./index.css"
 
+function DeferredAnalytics() {
+  const [Analytics, setAnalytics] = useState<ComponentType | null>(null)
+
+  useEffect(() => {
+    const loadAnalytics = () => {
+      import("@vercel/analytics/react").then(({ Analytics: AnalyticsComponent }) => {
+        setAnalytics(() => AnalyticsComponent)
+      })
+    }
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void) => number
+      cancelIdleCallback?: (handle: number) => void
+    }
+    const usesIdleCallback = Boolean(idleWindow.requestIdleCallback)
+    const idleHandle = usesIdleCallback
+      ? idleWindow.requestIdleCallback!(loadAnalytics)
+      : window.setTimeout(loadAnalytics, 1500)
+
+    return () => {
+      if (usesIdleCallback && idleWindow.cancelIdleCallback) {
+        idleWindow.cancelIdleCallback(idleHandle)
+      } else {
+        window.clearTimeout(idleHandle)
+      }
+    }
+  }, [])
+
+  return Analytics ? <Analytics /> : null
+}
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-    <Analytics />
-  </React.StrictMode>,
+    <DeferredAnalytics />
+  </StrictMode>,
 )
 
 if ("serviceWorker" in navigator) {

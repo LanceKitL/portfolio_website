@@ -2,6 +2,7 @@ import { motion } from "motion/react"
 import SectionHeading from "@/components/SectionHeading"
 import { CERTIFICATIONS } from "@/data/content"
 import { fadeUp, staggerContainer } from "@/lib/animations"
+import LazyImage from "@/components/LazyImage"
 
 export default function CertificationsSection() {
   return (
@@ -31,10 +32,11 @@ export default function CertificationsSection() {
             <div className="grid gap-0 sm:grid-cols-[minmax(220px,0.8fr)_1.2fr]">
               <div className="border-b border-[#d2d2d7]/70 bg-[#eef2f5] p-4 dark:border-[#4a4b50]/70 dark:bg-[#1d1e20] sm:border-b-0 sm:border-r sm:p-6">
                 <div className="relative aspect-[4/3] overflow-hidden border border-[#cbd5df] bg-white shadow-[0_12px_30px_rgba(27,45,62,0.12)] dark:border-[#4a4b50] dark:bg-[#303135]">
-                  <img
+                  <LazyImage
                     src={certification.image}
                     alt={`${certification.name} certificate from ${certification.provider}`}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover object-top"
                   />
                 </div>

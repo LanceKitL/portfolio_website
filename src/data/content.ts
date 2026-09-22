@@ -56,7 +56,7 @@ export const PROJECTS: Project[] = [
       { value: "1", label: "path from inventory to deal" },
     ],
     tags: ["Python", "Flask", "Svelte", "Tailwind", "SocketIO"],
-    image: "/001.jpg",
+    image: "/001.webp",
     github: "https://github.com/LanceKitL/automatik",
   },
   {
@@ -76,7 +76,7 @@ export const PROJECTS: Project[] = [
       { value: "100%", label: "fullstack ownership" },
     ],
     tags: ["Figma","React", "Tailwind", "Shadcn"],
-    image: "/002.jpg",
+    image: "/002.webp",
     github: "https://github.com/LanceKitL/tilao_corp_demo",
     live: "https://tilao-corp-demo.vercel.app/",
   },
@@ -97,7 +97,7 @@ export const PROJECTS: Project[] = [
       { value: "3", label: "services bootstrapped" },
     ],
     tags: ["Shell", "Laravel", "Tailwind"],
-    image: "/003.jpg",
+    image: "/003.webp",
     github: "https://github.com/LanceKitL/sci-lab",
   },
   {
@@ -112,44 +112,44 @@ export const PROJECTS: Project[] = [
     longDescription:
       "KITCADEMY is an experimental mobile learning management system (LMS) prototype created while exploring advanced UI/UX design and interactive prototyping in Figma. Designed around a scholarly pixel-art capybara mascot, the prototype covers responsive authentication screens (Login, Sign-Up, and state transitions), crisp input form ergonomics, and tactile button hover and click states. The project served as a playground for mastering Figma auto-layout, interactive component variants, and crafting a warm, gamified aesthetic for educational apps.",
     tags: ["Figma", "UI/UX", "Mobile", "Prototyping"],
-    image: "/004.png",
+    image: "/004.webp",
     live: "https://www.figma.com/design/XAkNZu4SNulhQztA1QxxGC/LMS---JUSTICE--Copy-?node-id=0-1&t=23MFhoepLhFpOujE-1",
   },
 ]
 
 export const ACHIEVEMENTS: Achievement[] = [
   {
-    icon: "/icons/most-improved.jpg",
+    icon: "/icons/most-improved.webp",
     title: "Most Improved Award",
     result: "Award recipient",
     detail: "ASEAN Manila · Web Technologies",
   },
   {
-    icon: "/icons/nationals-bronze.jpg",
+    icon: "/icons/nationals-bronze.webp",
     title: "Web Technologies Nationals",
     result: "Bronze Medalist",
     detail: "Worldskills Philippines",
   },
   {
-    icon: "/icons/regionals-gold.jpg",
+    icon: "/icons/regionals-gold.webp",
     title: "Web Technologies Regionals",
     result: "Gold Medalist",
     detail: "Worldskills Philippines",
   },
   {
-    icon: "/icons/experience.jpg",
+    icon: "/icons/experience.webp",
     title: "3+ Years Experience",
     result: "Full-stack Development",
     detail: "UI/UX Design",
   },
   {
-    icon: "/icons/toolkit.jpg",
+    icon: "/icons/toolkit.webp",
     title: "Cross-stack Proficiency",
     result: "Toolkit",
     detail: "Python, Svelte, React, Laravel, Tailwind, ReactNative, OpenCode",
   },
   {
-    icon: "/icons/collaboration.jpg",
+    icon: "/icons/collaboration.webp",
     title: "Open to Collaboration",
     result: "Availability",
     detail: "Part-time & Project-based roles",
@@ -179,6 +179,6 @@ export const CERTIFICATIONS: Certification[] = [
     status: "Completed",
     focus: "Full-stack web development across frontend interfaces, backend services, databases, and deployment.",
     year: "2024",
-    image: "/certs/The_Complete_2024_Web_Development_Bootcamp.jpg",
+    image: "/certs/The_Complete_2024_Web_Development_Bootcamp.webp",
   },
 ]

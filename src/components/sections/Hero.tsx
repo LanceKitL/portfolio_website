@@ -79,7 +79,7 @@ export default function Hero() {
                 autoPlay
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 className="h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#17181a]/75 via-transparent to-transparent" />

@@ -104,6 +104,14 @@ a {
     0 12px 24px rgba(0, 0, 0, 0.55);
 }
 
+.github-snake-light {
+  filter: hue-rotate(90deg) saturate(1.25);
+}
+
+.github-snake-dark {
+  filter: hue-rotate(-105deg) saturate(1.4);
+}
+
 .loader {
   width: 120px;
   height: 20px;

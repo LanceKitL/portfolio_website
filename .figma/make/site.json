@@ -1,7 +1,8 @@
 {
-  "description": "Showcase your projects, achievements, and contact info in a sleek, Apple-inspired portfolio that highlights your work with clean design and intuitive navigation.",
+  "title": "Kit - Portfolio Website",
+  "description": "Explore Kit's portfolio of full-stack software, thoughtful interfaces, and practical digital tools built for real-world workflows.",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
