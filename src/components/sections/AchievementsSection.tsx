@@ -74,7 +74,9 @@ export default function AchievementsSection() {
               <strong className="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7]">
                 {item.title}
               </strong>
-              <span className="block mt-0.5">{item.result} · {item.detail}</span>
+              <span className="block mt-0.5">
+                {item.result} · {item.detail}
+              </span>
             </span>
           </motion.div>
         ))}
@@ -96,7 +98,9 @@ export default function AchievementsSection() {
             <div className="text-[32px] lg:text-[42px] font-bold tracking-[-0.03em] mb-1">
               {stat.value}
             </div>
-            <div className="text-[10px] lg:text-[13px] text-[#6e6e73]">{stat.label}</div>
+            <div className="text-[10px] lg:text-[13px] text-[#6e6e73]">
+              {stat.label}
+            </div>
           </motion.div>
         ))}
       </motion.div>

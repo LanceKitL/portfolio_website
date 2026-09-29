@@ -1,26 +1,39 @@
 import { motion } from "motion/react"
+import type { IconType } from "react-icons"
+import {
+  SiFigma,
+  SiFlask,
+  SiGnubash,
+  SiJavascript,
+  SiLaravel,
+  SiPython,
+  SiReact,
+  SiSvelte,
+  SiTailwindcss,
+} from "react-icons/si"
 import SectionHeading from "@/components/SectionHeading"
 import { fadeUp, staggerContainer } from "@/lib/animations"
 
-const CAPABILITIES = [
+interface Capability {
+  label: string
+  title: string
+  detail: string
+  stack: {
+    name: string
+    icon: IconType
+  }[]
+}
+
+const CAPABILITIES: Capability[] = [
   {
     label: "INTERFACE DESIGN",
     title: "Make complex work legible",
     detail:
       "Interfaces that help customers and teams see what matters, decide faster, and keep moving.",
     stack: [
-      [
-        "React",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-      ],
-      [
-        "Svelte",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/svelte/svelte-original.svg",
-      ],
-      [
-        "Tailwind",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-      ],
+      { name: "React", icon: SiReact },
+      { name: "Svelte", icon: SiSvelte },
+      { name: "Tailwind", icon: SiTailwindcss },
     ],
   },
   {
@@ -29,18 +42,9 @@ const CAPABILITIES = [
     detail:
       "Secure workflows, APIs, data, and real-time features working together as one system.",
     stack: [
-      [
-        "Python",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-      ],
-      [
-        "Flask",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg",
-      ],
-      [
-        "Laravel",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
-      ],
+      { name: "Python", icon: SiPython },
+      { name: "Flask", icon: SiFlask },
+      { name: "Laravel", icon: SiLaravel },
     ],
   },
   {
@@ -49,18 +53,9 @@ const CAPABILITIES = [
     detail:
       "Fast paths from a rough idea to a tool people can test, trust, and use.",
     stack: [
-      [
-        "Figma",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
-      ],
-      [
-        "JavaScript",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-      ],
-      [
-        "Shell",
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg",
-      ],
+      { name: "Figma", icon: SiFigma },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "Shell", icon: SiGnubash },
     ],
   },
 ]
@@ -122,18 +117,14 @@ export default function CapabilitiesSection() {
                 Working with
               </span>
               <div className="flex items-center gap-2">
-                {capability.stack.map(([name, icon]) => (
+                {capability.stack.map(({ name, icon: Icon }) => (
                   <span
                     key={name}
                     title={name}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#d2d2d7]/60 bg-white dark:border-[#4a4b50] dark:bg-[#303135]"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#d2d2d7]/60 bg-white text-[#424245] transition-colors hover:text-[#1d1d1f] dark:border-[#4a4b50] dark:bg-[#303135] dark:text-[#b8b5ae] dark:hover:text-[#f5f5f7]"
                   >
-                    <img
-                      src={icon}
-                      alt={name}
-                      loading="lazy"
-                      className="h-5 w-5"
-                    />
+                    <Icon className="h-4.5 w-4.5" aria-hidden="true" />
+                    <span className="sr-only">{name}</span>
                   </span>
                 ))}
               </div>

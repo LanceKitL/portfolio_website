@@ -4,7 +4,9 @@ interface SectionSkeletonProps {
   className?: string
 }
 
-export default function SectionSkeleton({ className = "" }: SectionSkeletonProps) {
+export default function SectionSkeleton({
+  className = "",
+}: SectionSkeletonProps) {
   return (
     <motion.div
       aria-hidden="true"

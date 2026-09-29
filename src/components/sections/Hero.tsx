@@ -1,4 +1,5 @@
-import { motion } from "motion/react"
+import { motion, useAnimationFrame, useMotionValue } from "motion/react"
+import { useRef, useState } from "react"
 import { FaDatabase, FaJava } from "react-icons/fa6"
 import {
   SiC,
@@ -14,7 +15,7 @@ import {
   SiTailwindcss,
   SiCoderabbit,
   SiGit,
-  SiOpencode
+  SiOpencode,
 } from "react-icons/si"
 import BlurText from "@/components/BlurText"
 import { ease } from "@/lib/animations"
@@ -39,6 +40,52 @@ const TECH_STACK = [
 ]
 
 export default function Hero() {
+  const marqueeTrackRef = useRef<HTMLDivElement>(null)
+  const isDragging = useRef(false)
+  const isHovered = useRef(false)
+  const dragStart = useRef({ pointerX: 0, offset: 0 })
+  const marqueeX = useMotionValue(0)
+  const [dragging, setDragging] = useState(false)
+
+  useAnimationFrame((_, delta) => {
+    if (isDragging.current || isHovered.current) return
+
+    const loopWidth = (marqueeTrackRef.current?.scrollWidth ?? 0) / 2
+    if (!loopWidth) return
+
+    const nextOffset = marqueeX.get() - delta * 0.035
+    marqueeX.set(nextOffset <= -loopWidth ? nextOffset + loopWidth : nextOffset)
+  })
+
+  function handleMarqueePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    isDragging.current = true
+    setDragging(true)
+    dragStart.current = { pointerX: event.clientX, offset: marqueeX.get() }
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  function handleMarqueePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    if (!isDragging.current) return
+    marqueeX.set(
+      dragStart.current.offset + event.clientX - dragStart.current.pointerX,
+    )
+  }
+
+  function handleMarqueePointerUp(event: React.PointerEvent<HTMLDivElement>) {
+    if (!isDragging.current) return
+    isDragging.current = false
+    setDragging(false)
+    event.currentTarget.releasePointerCapture(event.pointerId)
+
+    const loopWidth = (marqueeTrackRef.current?.scrollWidth ?? 0) / 2
+    if (!loopWidth) return
+
+    let normalizedOffset = marqueeX.get()
+    while (normalizedOffset > 0) normalizedOffset -= loopWidth
+    while (normalizedOffset <= -loopWidth) normalizedOffset += loopWidth
+    marqueeX.set(normalizedOffset)
+  }
+
   return (
     <section
       id="hero"
@@ -52,7 +99,8 @@ export default function Hero() {
                 className="w-full hidden lg:block shrink-0 lg:w-[25rem]"
                 initial={{ opacity: 0, scale: 0.6 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.25, ease }}>
+                transition={{ duration: 0.6, delay: 0.25, ease }}
+              >
                 <div className="overflow-hidden rounded-[2rem] border border-[#cbd5df] bg-[#f8fafb] p-3 shadow-[0_24px_70px_rgba(27,45,62,0.12)] dark:border-[#3b3c40] dark:bg-[#242528] dark:shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
                   <div className="relative aspect-[31/24] overflow-hidden rounded-[1.45rem] bg-[#2b2c30]">
                     <video
@@ -70,7 +118,7 @@ export default function Hero() {
                           Lance Kit
                         </p>
                         <div className="flex items-center justify-between pb-1 text-[11px] text-[#6b7782] dark:text-[#aaa69e]">
-                          <span>SWE / UI/UX  | Quezon City</span>
+                          <span>SWE / UI/UX | Quezon City</span>
                         </div>
                       </div>
                     </div>
@@ -116,21 +164,37 @@ export default function Hero() {
           <div className="relative overflow-hidden opacity-70 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#eef2f5] to-transparent blur-[2px] dark:from-[#1d1e20]" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#eef2f5] to-transparent blur-[2px] dark:from-[#1d1e20]" />
-            <div className="tech-marquee-track flex w-max gap-3 py-1 hover:[animation-play-state:paused]">
-              {[...TECH_STACK, ...TECH_STACK].map(({ name, icon: Icon }, index) => (
-                <span
-                  key={`${name}-${index}`}
-                  className="flex shrink-0 items-center gap-2 rounded-full bg-white/70 px-3 py-1.5 text-[12px] font-medium text-[#6e6e73] dark:bg-[#2a2b2e]/80 dark:text-[#b8b5ae]"
-                >
-                  <Icon aria-hidden="true" className="text-[17px]" />
-                  {name}
-                </span>
-              ))}
-            </div>
+            <motion.div
+              ref={marqueeTrackRef}
+              style={{ x: marqueeX }}
+              onPointerDown={handleMarqueePointerDown}
+              onPointerMove={handleMarqueePointerMove}
+              onPointerUp={handleMarqueePointerUp}
+              onPointerCancel={handleMarqueePointerUp}
+              onPointerEnter={() => {
+                isHovered.current = true
+              }}
+              onPointerLeave={() => {
+                isHovered.current = false
+              }}
+              className={`flex w-max gap-3 py-1 [touch-action:pan-y] ${
+                dragging ? "cursor-grabbing" : "cursor-grab"
+              }`}
+            >
+              {[...TECH_STACK, ...TECH_STACK].map(
+                ({ name, icon: Icon }, index) => (
+                  <span
+                    key={`${name}-${index}`}
+                    className="flex shrink-0 items-center gap-2 rounded-full bg-white/70 px-3 py-1.5 text-[12px] font-medium text-[#6e6e73] dark:bg-[#2a2b2e]/80 dark:text-[#b8b5ae]"
+                  >
+                    <Icon aria-hidden="true" className="text-[17px]" />
+                    {name}
+                  </span>
+                ),
+              )}
+            </motion.div>
           </div>
         </div>
-
-
       </div>
     </section>
   )

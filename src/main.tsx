@@ -8,9 +8,11 @@ function DeferredAnalytics() {
 
   useEffect(() => {
     const loadAnalytics = () => {
-      import("@vercel/analytics/react").then(({ Analytics: AnalyticsComponent }) => {
-        setAnalytics(() => AnalyticsComponent)
-      })
+      import("@vercel/analytics/react").then(
+        ({ Analytics: AnalyticsComponent }) => {
+          setAnalytics(() => AnalyticsComponent)
+        },
+      )
     }
     const idleWindow = window as Window & {
       requestIdleCallback?: (callback: () => void) => number

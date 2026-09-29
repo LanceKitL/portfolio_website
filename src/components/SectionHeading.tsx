@@ -7,7 +7,11 @@ interface SectionHeadingProps {
   className?: string
 }
 
-export default function SectionHeading({ title, meta, className = "" }: SectionHeadingProps) {
+export default function SectionHeading({
+  title,
+  meta,
+  className = "",
+}: SectionHeadingProps) {
   return (
     <motion.div
       className={`mb-16 flex items-baseline justify-between ${className}`}

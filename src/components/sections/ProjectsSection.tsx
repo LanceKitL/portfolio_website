@@ -1,11 +1,10 @@
-import { AnimatePresence,motion } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 import SectionHeading from "@/components/SectionHeading"
 import GitHubActivity from "@/components/sections/GitHubActivity"
 import ProjectCard from "@/components/sections/ProjectCard"
 import ProjectOverlay from "@/components/sections/ProjectOverlay"
 import { PROJECTS } from "@/data/content"
 import useProjectModal from "@/hooks/useProjectModal"
-
 
 export default function ProjectsSection() {
   const { selectedProject, open, close } = useProjectModal()

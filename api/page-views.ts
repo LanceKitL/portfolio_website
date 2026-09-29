@@ -48,9 +48,7 @@ export function findCount(value: unknown): number | null {
   // Stats endpoint nests under data.stats / data.up_count variants.
 
   if (record.data && typeof record.data === "object") {
-    const nested = findCount(
-      (record.data as Record<string, unknown>).stats,
-    )
+    const nested = findCount((record.data as Record<string, unknown>).stats)
 
     if (nested !== null) return nested
   }

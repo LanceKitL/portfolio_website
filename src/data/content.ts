@@ -7,7 +7,7 @@ export interface Project {
   outcome: string
   description: string
   longDescription: string
-  metrics?: { value: string; label: string }[]
+  metrics?: { value: string label: string }[]
   tags: string[]
   image: string
   github?: string
@@ -36,7 +36,13 @@ export interface Certification {
   href?: string
 }
 
-export const NAV_LINKS = ["Projects", "Achievements", "Certifications", "Capabilities", "Contact"]
+export const NAV_LINKS = [
+  "Projects",
+  "Achievements",
+  "Certifications",
+  "Capabilities",
+  "Contact",
+]
 
 export const PROJECTS: Project[] = [
   {
@@ -75,7 +81,7 @@ export const PROJECTS: Project[] = [
       { value: "1", label: "unified dashboard" },
       { value: "100%", label: "fullstack ownership" },
     ],
-    tags: ["Figma","React", "Tailwind", "Shadcn"],
+    tags: ["Figma", "React", "Tailwind", "Shadcn"],
     image: "/optimized/002.jpg",
     github: "https://github.com/LanceKitL/tilao_corp_demo",
     live: "https://tilao-corp-demo.vercel.app/",
@@ -106,7 +112,8 @@ export const PROJECTS: Project[] = [
     category: "EdTech / Mobile Prototype",
     year: "2026",
     role: "UI/UX Designer",
-    outcome: "Gamified mobile LMS onboarding with interactive Figma micro-interactions",
+    outcome:
+      "Gamified mobile LMS onboarding with interactive Figma micro-interactions",
     description:
       "Playful mobile learning management system prototype designed in Figma, combining clean authentication flows with an adorable pixel-art capybara scholar mascot.",
     longDescription:
@@ -177,7 +184,8 @@ export const CERTIFICATIONS: Certification[] = [
     name: "The Complete 2024 Web Development Bootcamp",
     provider: "Udemy",
     status: "Completed",
-    focus: "Full-stack web development across frontend interfaces, backend services, databases, and deployment.",
+    focus:
+      "Full-stack web development across frontend interfaces, backend services, databases, and deployment.",
     year: "2024",
     image: "/optimized/certs/bootcamp.jpg",
   },

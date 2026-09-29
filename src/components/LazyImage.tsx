@@ -26,7 +26,9 @@ export default function LazyImage({
       )}
       <img
         {...props}
-        className={`relative h-full w-full transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
+        className={`relative h-full w-full transition-opacity duration-300 ${
+          loaded ? "opacity-100" : "opacity-0"
+        } ${className}`}
         onLoad={(event) => {
           setLoaded(true)
           onLoad?.(event)

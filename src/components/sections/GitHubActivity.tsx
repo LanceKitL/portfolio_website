@@ -40,9 +40,10 @@ export default function GitHubActivity() {
 
         <div className="w-full pb-1">
           {lightImageError && darkImageError ? (
-              <div className="flex min-h-24 items-center justify-center rounded-xl border border-dashed border-[#d2d2d7] px-6 text-center text-[12px] text-[#6e6e73] dark:border-[#4a4b50] dark:text-[#aaa69e]">
-                Activity will appear here when the snk workflow publishes the contribution SVG.
-              </div>
+            <div className="flex min-h-24 items-center justify-center rounded-xl border border-dashed border-[#d2d2d7] px-6 text-center text-[12px] text-[#6e6e73] dark:border-[#4a4b50] dark:text-[#aaa69e]">
+              Activity will appear here when the snk workflow publishes the
+              contribution SVG.
+            </div>
           ) : (
             <div>
               {!lightImageError && (
