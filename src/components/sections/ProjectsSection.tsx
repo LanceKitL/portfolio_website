@@ -23,7 +23,7 @@ export default function ProjectsSection() {
   return (
     <section id="projects" className="py-18 px-6 max-w-5xl mx-auto">
       <SectionHeading
-        title="Systems I built"
+        title="My Projects"
         meta={`${PROJECTS.length} workflow studies`}
       />
 
