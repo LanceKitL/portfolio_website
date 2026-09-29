@@ -45,10 +45,17 @@ export default function App() {
       <main>
         <Hero />
 
+          <div className="m-8 text-lg flex justify-center font-normal md:text-center md:text-3xl">
+            <p className="md:w-200">
+                I started when AI is not popular, now I use it for every project I build. I value user experience, design and scalable architecture.
+            </p>
+          </div>
+        <SectionDivider />
+
         <ProjectsSection />
 
         <SectionDivider />
-
+        
         <Suspense fallback={<SectionSkeleton />}>
           <AchievementsSection />
         </Suspense>

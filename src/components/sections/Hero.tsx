@@ -12,6 +12,9 @@ import {
   SiReact,
   SiSvelte,
   SiTailwindcss,
+  SiCoderabbit,
+  SiGit,
+  SiOpencode
 } from "react-icons/si"
 import BlurText from "@/components/BlurText"
 import { ease } from "@/lib/animations"
@@ -30,6 +33,9 @@ const TECH_STACK = [
   { name: "MariaDB", icon: SiMariadb },
   { name: "Java", icon: FaJava },
   { name: "C", icon: SiC },
+  { name: "Code Rabbit", icon: SiCoderabbit },
+  { name: "Git", icon: SiGit },
+  { name: "Opencode", icon: SiOpencode },
 ]
 
 export default function Hero() {
@@ -76,7 +82,7 @@ export default function Hero() {
                 <BlurText
                   text="Crafting digital experience"
                   delay={80}
-                  className="text-[70px] mt-5 font-serif font-bold leading-[1.03] tracking-[-0.04em] text-[#2f6bff] sm:text-[72px] md:text-[96px] lg:text-[112px] dark:text-[#ffb86b]"
+                  className="text-[55px] mt-5 font-serif font-bold leading-[1.03] tracking-[-0.04em] text-[#2f6bff] sm:text-[72px] md:text-[90px] dark:text-[#ffb86b]"
                   direction="bottom"
                   stepDuration={0.2}
                   animationFrom={{ filter: "blur(10px)", opacity: 0, y: 30 }}
